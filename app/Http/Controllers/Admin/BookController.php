@@ -52,9 +52,9 @@ class BookController extends Controller
         $book->slug = $str;
 
         if ($book->save()) {
-            return redirect("/admin/books/list");
+            return redirect("/admin/book/add")->with('success', 'Kayıt Başarılı!');
         } else {
-            return redirect("/admin/books/list");
+            return redirect("/admin/book/add")->with('error', 'Kayıt Başarısız!');;
         }
     }
     //FormRequest
@@ -81,9 +81,9 @@ class BookController extends Controller
         ]);
 
         if ($book) {
-            return redirect("/admin/books/list");
+            return redirect("/admin/books/list")->with('successUpdate', 'Güncelleme Başarılı!');
         } else {
-            return redirect("/admin/books/list");
+            return redirect("/admin/books/list")->with('errorUpdate', 'Güncelleme Başarısız!');
         }
     }
 
@@ -96,9 +96,9 @@ class BookController extends Controller
         $book->delete();
 
         if ($book) {
-            return redirect("/admin/books/list");
+            return redirect("/admin/books/list")->with('successDelete', 'Kayıt Silme Başarılı!');
         } else {
-            return redirect("/admin/books/list");
+            return redirect("/admin/books/list")->with('errorDelete', 'Kayıt Silme Başarısız!');
         }
     }
 }

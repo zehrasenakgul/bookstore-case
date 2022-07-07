@@ -4,6 +4,15 @@
     <div class="layout-px-spacing">
 
         <div class=" layout-top-spacing">
+            @if (session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
+                </div>
+            @elseif (session()->has('error'))
+                <div class="alert alert-danger">
+                    {{ session()->get('error') }}
+                </div>
+            @endif
             <form class="form-vertical" enctype="multipart/form-data" action="{{ url('admin/book/add') }}" method="POST">
                 {{ csrf_field() }}
                 @if ($errors->any())
