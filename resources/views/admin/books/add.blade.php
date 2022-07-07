@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group mb-4">
                     <label class="control-label">Kitap ISBN Numarası:</label>
-                    <input type="text" name="book_no" class="form-control" required>
+                    <input type="number" name="book_no" class="form-control" required>
                 </div>
                 <div class="form-group mb-4">
                     <label class="control-label">Kitap Yazarı Seçimi</label>
@@ -29,7 +29,7 @@
                     </select>
                 </div>
                 <div class="form-group custom-file-container mb-4" data-upload-id="myFirstImage">
-                    <label class="control-label">Kitap Görsel Seçimi </label>
+                    <label class="control-label">Kitap Görsel Seçimi </label><br>
                     <label class="custom-file-container__custom-file">
                         <input type="file" name="image" class="custom-file-container__custom-file__custom-file-input"
                             accept="image/*">

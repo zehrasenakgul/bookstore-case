@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-group mb-4">
                     <label class="control-label">Kitap ISBN Numarası:</label>
-                    <input type="text" name="book_no" Value="{{ $book->book_no }}" class="form-control">
+                    <input type="number" name="book_no" Value="{{ $book->book_no }}" class="form-control">
                 </div>
                 <div class="form-group mb-4">
                     <label class="control-label">Kitap Yazarı Seçimi</label>
@@ -41,7 +41,7 @@
                     </select>
                 </div>
                 <div class="form-group custom-file-container mb-4" data-upload-id="myFirstImage">
-                    <label class="control-label">Kitap Görsel Seçimi </label>
+                    <label class="control-label">Kitap Görsel Seçimi </label><br>
                     <div class="card component-card_2 mb-3" style="width:150px">
                         @if ($book->image != 'no-image/no-image.jpeg')
                             <img src="{{ asset('uploads/' . $book->image) }}" class="card-img-top" alt="widget-card-2">
