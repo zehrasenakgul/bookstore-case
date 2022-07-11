@@ -4,6 +4,15 @@
     <div class="layout-px-spacing">
 
         <div class=" layout-top-spacing">
+            @if (session()->has('authorUpdateSuccessful'))
+                <div class="alert alert-success">
+                    {{ session()->get('authorUpdateSuccessful') }}
+                </div>
+            @elseif (session()->has('authorUpdateFailed'))
+                <div class="alert alert-danger">
+                    {{ session()->get('authorUpdateFailed') }}
+                </div>
+            @endif
             <form class="form-vertical" enctype="multipart/form-data"
                 action="{{ url('admin/author/update/' . $author->id) }}" method="POST">
                 <input type="hidden" name="_method" value="PUT">

@@ -8,6 +8,7 @@ use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Session;
 
 class AuthorController extends Controller
 {
@@ -51,9 +52,12 @@ class AuthorController extends Controller
         ]);
 
         if ($author) {
-            return redirect("/admin/author/update/$author->id")->with('authorUpdateSuccessful', 'Yazar Güncelleme Başarılı!');
+            Session::flash('authorUpdateSuccessful', 'Yazar Güncelleme Başarılı!');
+            return view("admin.authors.update", compact("author"));
+            // return redirect("/admin/author/update/$author->id")->with('authorUpdateSuccessful', 'Yazar Güncelleme Başarılı!');
         } else {
-            return redirect("/admin/author/update/$author->id")->with('authorUpdateFailed', 'Yazar Güncelleme Başarısız!');
+            Session::flash('authorUpdateFailed', 'Yazar Güncelleme Başarısız!');
+            return view("admin.authors.update", compact("author"));
         }
     }
     public function destroy($id)
