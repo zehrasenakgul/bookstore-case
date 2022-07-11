@@ -10,6 +10,20 @@
                 </svg>
                 Yeni Ekle</button>
 
+            @if (session()->has('settingRegistrationSuccessful'))
+                <div class="alert alert-success">
+                    {{ session()->get('settingRegistrationSuccessful') }}
+                </div>
+            @elseif (session()->has('settingUpdateSuccessful'))
+                <div class="alert alert-success">
+                    {{ session()->get('settingUpdateSuccessful') }}
+                </div>
+            @elseif (session()->has('settingDeletionSuccessful'))
+                <div class="alert alert-success">
+                    {{ session()->get('settingDeletionSuccessful') }}
+                </div>
+            @endif
+
             <div class="table-responsive">
                 <table class="table table-bordered table-hover table-condensed mb-4">
                     <thead>
@@ -51,14 +65,7 @@
                     },
 
                     success: function(response) {
-
-                        console.log("Başarılı");
-                        console.log(response);
-                    },
-
-                    error: function(response) {
-                        console.log("Hatalı");
-                        console.log(response);
+                        location.reload();
                     }
                 });
             });
@@ -100,16 +107,8 @@
                         value: value
                     },
                     success: function(response) {
-                        if (response.status == "success") {
-                            location.reload();
-                        }
-                        console.log(response);
-                    },
-                    error: function(response) {
-                        console.log(response);
+                        location.reload();
                     }
-
-
                 })
             };
 
@@ -123,15 +122,10 @@
                         key: button.data("key")
                     },
                     success: function(response) {
-                        if (response.status == "success") {
-                            button.closest("tr").remove();
-                            location.reload();
-                        }
-                        console.log(response);
+                        button.closest("tr").remove();
+                        location.reload();
                     },
-                    error: function(response) {
-                        console.log(response);
-                    }
+                    error: function(response) {}
 
                 });
             });

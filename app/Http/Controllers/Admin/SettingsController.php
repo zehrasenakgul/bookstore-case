@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
@@ -17,10 +18,7 @@ class SettingsController extends Controller
     public function edit(Request $request)
     {
         $setting = Setting::where("key", $request->key)->update(["value" => $request->value]);
-        if ($setting) {
-            return "Başarılı";
-        }
-        return "hatalı";
+        Session::flash('settingUpdateSuccessful', 'Ayar Güncelleme Başarılı!');
     }
 
     public function store(Request $request)
@@ -29,21 +27,13 @@ class SettingsController extends Controller
 
         $setting->key = $request->key;
         $setting->value = $request->value;
-
-        if ($setting->save()) {
-            return ["status" => "success", "message" => "Ayar başarıyla kaydedildi", "title" => "Başarılı"];
-        } else {
-            return ["status" => "error", "message" => "Ayar kaydedilmedi", "title" => "Hatalı"];
-        }
+        $setting->save();
+        Session::flash('settingRegistrationSuccessful', 'Ayar Kaydı Başarılı!');
     }
 
     public function destroy(Request $request)
     {
         $setting = Setting::where("key", $request->key)->delete();
-        if ($setting) {
-            return ["status" => "success", "message" => "Ayar başarıyla silindi", "title" => "Başarılı"];
-        } else {
-            return ["status" => "error", "message" => "Ayar silinmedi", "title" => "Hatalı"];
-        }
+        Session::flash('settingDeletionSuccessful', 'Ayar Silme Başarılı!');
     }
 }

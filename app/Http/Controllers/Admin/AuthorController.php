@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 use App\Models\Book;
 use App\Models\Author;
 use Illuminate\Http\Request;

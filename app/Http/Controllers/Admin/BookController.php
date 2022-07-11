@@ -62,13 +62,6 @@ class BookController extends Controller
         $book = Book::where("id", $book->id)->firstOrFail();
         $filePath = $book->image;
         $str = Str::slug($request->name, '-');
-        if ($request->hasFile('image')) {
-
-            if ($book->image != "no-image/no-image.jpeg") {
-                Storage::disk('uploads')->delete($book->image);
-            }
-            $filePath = Storage::disk('uploads')->put('books', $request->file("image"), 'public');
-        }
 
         $book->update([
             "name" => $request->input('name'),
@@ -80,6 +73,12 @@ class BookController extends Controller
         ]);
 
         if ($book) {
+            if ($request->hasFile('image')) {
+                if ($book->image != "no-image/no-image.jpeg") {
+                    Storage::disk('uploads')->delete($book->image);
+                }
+                $filePath = Storage::disk('uploads')->put('books', $request->file("image"), 'public');
+            }
             Session::flash('bookUpdateSuccessful', 'Kitap Güncelleme Başarılı!');
         } else {
             Session::flash('bookUpdateFailed', 'Kitap Güncelleme Başarısız!');
