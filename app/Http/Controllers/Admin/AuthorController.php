@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\Author;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-use Session;
+
 
 class AuthorController extends Controller
 {
@@ -58,7 +59,7 @@ class AuthorController extends Controller
         } else {
             Session::flash('authorUpdateFailed', 'Yazar Güncelleme Başarısız!');
         }
-        return view("admin.authors.update", compact("author"));
+        return $this->show($author);
     }
     public function destroy(Author $author)
     {

@@ -2,24 +2,24 @@
 @section('content')
     <div class="layout-px-spacing">
         <div class=" layout-top-spacing">
+            @if (session()->has('bookDeletionSuccessful'))
+                <div class="alert alert-success">
+                    {{ session()->get('bookDeletionSuccessful') }}
+                </div>
+            @elseif (session()->has('bookDeletionFailed'))
+                <div class="alert alert-danger">
+                    {{ session()->get('bookDeletionFailed') }}
+                </div>
+            @elseif (session()->has('bookRegistrationSuccessful'))
+                <div class="alert alert-success">
+                    {{ session()->get('bookRegistrationSuccessful') }}
+                </div>
+            @elseif (session()->has('bookRegistrationFailed'))
+                <div class="alert alert-danger">
+                    {{ session()->get('bookRegistrationFailed') }}
+                </div>
+            @endif
             <div class="table-responsive">
-                @if (session()->has('successUpdate'))
-                    <div class="alert alert-success">
-                        {{ session()->get('successUpdate') }}
-                    </div>
-                @elseif (session()->has('errorUpdate'))
-                    <div class="alert alert-danger">
-                        {{ session()->get('errorUpdate') }}
-                    </div>
-                @elseif (session()->has('successDelete'))
-                    <div class="alert alert-success">
-                        {{ session()->get('successDelete') }}
-                    </div>
-                @elseif (session()->has('errorDelete'))
-                    <div class="alert alert-danger">
-                        {{ session()->get('errorDelete') }}
-                    </div>
-                @endif
                 <table class="table table-bordered table-hover table-condensed mb-4">
                     <thead>
                         <tr>

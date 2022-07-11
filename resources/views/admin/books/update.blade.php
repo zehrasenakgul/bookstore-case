@@ -2,8 +2,16 @@
 @section('content')
 
     <div class="layout-px-spacing">
-
         <div class=" layout-top-spacing">
+            @if (session()->has('bookUpdateSuccessful'))
+                <div class="alert alert-success">
+                    {{ session()->get('bookUpdateSuccessful') }}
+                </div>
+            @elseif (session()->has('bookUpdateFailed'))
+                <div class="alert alert-danger">
+                    {{ session()->get('bookUpdateFailed') }}
+                </div>
+            @endif
             <form class="form-vertical" enctype="multipart/form-data" action="{{ url('admin/book/update/' . $book->id) }}"
                 method="POST">
                 <input type="hidden" name="_method" value="PUT">

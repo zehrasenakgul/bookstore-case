@@ -2,7 +2,6 @@
 @section('content')
 
     <div class="layout-px-spacing">
-
         <div class=" layout-top-spacing">
             @if (session()->has('authorUpdateSuccessful'))
                 <div class="alert alert-success">

@@ -9,6 +9,8 @@ use App\Http\Requests\BookPostRequest;
 use App\Models\Author;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
+
 
 class BookController extends Controller
 {
@@ -17,9 +19,9 @@ class BookController extends Controller
         $authors = Author::where("status", "1")->get();
         return view("admin.books.add", compact("authors"));
     }
-    public function show($id)
+    public function show(Book $book)
     {
-        $book = Book::where("id", $id)->firstOrFail();
+        $book = Book::where("id", $book->id)->firstOrFail();
         $authors = Author::where("status", "1")->get();
         return view("admin.books.update", compact("authors", "book"));
     }
@@ -32,14 +34,11 @@ class BookController extends Controller
     //FormRequest
     public function store(BookPostRequest $request)
     {
-        $filePath = false;
         $book = new Book();
 
         if ($request->file("image") != null) {
             $filePath = Storage::disk('uploads')->put('books', $request->file("image"), 'public');
-        }
-
-        if ($filePath == false) {
+        } else {
             $filePath = Storage::disk('uploads')->put('books', $request->file("image"), 'public');
         }
 
@@ -52,53 +51,55 @@ class BookController extends Controller
         $book->slug = $str;
 
         if ($book->save()) {
-            return redirect("/admin/book/add")->with('success', 'Kayıt Başarılı!');
+            Session::flash('bookRegistrationSuccessful', 'Kitap Kaydı Başarılı!');
         } else {
-            return redirect("/admin/book/add")->with('error', 'Kayıt Başarısız!');;
+            Session::flash('bookRegistrationFailed', 'Kitap Kaydı Başarısız!');
         }
+        return $this->index();
     }
     //FormRequest
-    public function edit(Request $request, $id)
+    public function edit(Request $request, Book $book)
     {
-        $oldBook = Book::where("id", $id)->firstOrFail();
-        $filePath = $oldBook->image;
+        $book = Book::where("id", $book->id)->firstOrFail();
+        $filePath = $book->image;
         $str = Str::slug($request->name, '-');
 
         if ($request->file("image") != null) {
-            if ($oldBook->image != "no-image/no-image.jpeg") {
-                Storage::disk('uploads')->delete($oldBook->image);
+            if ($book->image != "no-image/no-image.jpeg") {
+                Storage::disk('uploads')->delete($book->image);
             }
             $filePath = Storage::disk('uploads')->put('books', $request->file("image"), 'public');
         }
 
-        $book = Book::where("id", $id)->update([
+        $book->update([
             "name" => $request->input('name'),
             "author_id" => $request->input('author_id'),
             "book_no" => $request->input('book_no'),
             "status" => $request->input('status'),
             "image" => $filePath,
-            "slug" => $str,
+            "slug" => $str
         ]);
 
         if ($book) {
-            return redirect("/admin/books/list")->with('successUpdate', 'Güncelleme Başarılı!');
+            Session::flash('bookUpdateSuccessful', 'Kitap Güncelleme Başarılı!');
         } else {
-            return redirect("/admin/books/list")->with('errorUpdate', 'Güncelleme Başarısız!');
+            Session::flash('bookUpdateFailed', 'Kitap Güncelleme Başarısız!');
         }
+        return $this->show($book);
     }
 
-    public function destroy($id)
+    public function destroy(Book $book)
     {
-        $book = Book::where("id", $id)->firstOrFail();
-        if ($book->image != "no-image/no-image.jpeg") {
-            Storage::disk('uploads')->delete($book->image);
-        }
-        $book->delete();
-
-        if ($book) {
-            return redirect("/admin/books/list")->with('successDelete', 'Kayıt Silme Başarılı!');
+        $deletedBook = Book::where("id", $book->id)->firstOrFail();
+        $deletedBook->delete();
+        if ($deletedBook) {
+            if ($book->image != "no-image/no-image.jpeg") {
+                Storage::disk('uploads')->delete($book->image);
+            }
+            Session::flash('bookDeletionSuccessful', 'Kitap Silme Başarılı!');
         } else {
-            return redirect("/admin/books/list")->with('errorDelete', 'Kayıt Silme Başarısız!');
+            Session::flash('bookDeletionFailed', 'Kitap Silme Başarısız!');
         }
+        return $this->index();
     }
 }
