@@ -21,9 +21,9 @@ class AuthorController extends Controller
         $authors = Author::all();
         return view("admin.authors.list", compact("authors"));
     }
-    public function show($id)
+    public function show(Author $author)
     {
-        $author = Author::where("id", $id)->firstOrFail();
+        $author = Author::where("id", $author->id)->firstOrFail();
         return view("admin.authors.update", compact("author"));
     }
 
@@ -36,10 +36,11 @@ class AuthorController extends Controller
         $author->slug = $str;
 
         if ($author->save()) {
-            return redirect("/admin/authors/list");
+            Session::flash('authorRegistrationSuccessful', 'Yazar Kaydı Başarılı!');
         } else {
-            return redirect("/admin/authors/list");
+            Session::flash('authorRegistrationFailed', 'Yazar Kaydı Başarısız!');
         }
+        return $this->index();
     }
     public function edit(Request $request, Author $author)
     {
@@ -53,28 +54,29 @@ class AuthorController extends Controller
 
         if ($author) {
             Session::flash('authorUpdateSuccessful', 'Yazar Güncelleme Başarılı!');
-            return view("admin.authors.update", compact("author"));
             // return redirect("/admin/author/update/$author->id")->with('authorUpdateSuccessful', 'Yazar Güncelleme Başarılı!');
         } else {
             Session::flash('authorUpdateFailed', 'Yazar Güncelleme Başarısız!');
-            return view("admin.authors.update", compact("author"));
         }
+        return view("admin.authors.update", compact("author"));
     }
-    public function destroy($id)
+    public function destroy(Author $author)
     {
+        $authors = Author::all();
         //Yazar kaydı silindiğinde yazara ait kitaplar ve o kitaba ait görsel de silinmeli;
-        $author = Author::where("id", $id)->firstOrFail();
-        $book = Book::where("author_id", $author->id)->get();
-        foreach ($book as $bookItem) {
-            Storage::disk('uploads')->delete($bookItem->image);
-            $bookItem->delete();
-        }
-        $author->delete();
-
-        if ($author) {
-            return redirect("/admin/authors/list");
+        $deletedAuthor = Author::where("id", $author->id)->firstOrFail();
+        $deletedAuthor->delete();
+        //yazar silindiyse ona ait kitapları ve görselleri de siliyoruz =>
+        if ($deletedAuthor) {
+            $book = Book::where("author_id", $author->id)->get();
+            foreach ($book as $bookItem) {
+                Storage::disk('uploads')->delete($bookItem->image);
+                $bookItem->delete();
+            }
+            Session::flash('authorDeletionSuccessful', 'Yazar Silme Başarılı!');
         } else {
-            return redirect("/admin/authors/list");
+            Session::flash('authorDeletionFailed', 'Yazar Silme Başarısız!');
         }
+        return $this->index();
     }
 }
