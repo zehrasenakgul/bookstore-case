@@ -35,8 +35,7 @@ class BookController extends Controller
     public function store(BookPostRequest $request)
     {
         $book = new Book();
-
-        if ($request->file("image") != null) {
+        if ($request->hasFile('image')) {
             $filePath = Storage::disk('uploads')->put('books', $request->file("image"), 'public');
         } else {
             $filePath = Storage::disk('uploads')->put('books', $request->file("image"), 'public');
@@ -63,8 +62,7 @@ class BookController extends Controller
         $book = Book::where("id", $book->id)->firstOrFail();
         $filePath = $book->image;
         $str = Str::slug($request->name, '-');
-
-        if ($request->file("image") != null) {
+        if ($request->hasFile('image')) {
             if ($book->image != "no-image/no-image.jpeg") {
                 Storage::disk('uploads')->delete($book->image);
             }
