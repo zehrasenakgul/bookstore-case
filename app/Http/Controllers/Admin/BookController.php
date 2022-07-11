@@ -38,7 +38,7 @@ class BookController extends Controller
         if ($request->hasFile('image')) {
             $filePath = Storage::disk('uploads')->put('books', $request->file("image"), 'public');
         } else {
-            $filePath = Storage::disk('uploads')->put('books', $request->file("image"), 'public');
+            $filePath = "no-image/no-image.jpeg";
         }
 
         $book->name = $request->input('name');
@@ -63,6 +63,7 @@ class BookController extends Controller
         $filePath = $book->image;
         $str = Str::slug($request->name, '-');
         if ($request->hasFile('image')) {
+
             if ($book->image != "no-image/no-image.jpeg") {
                 Storage::disk('uploads')->delete($book->image);
             }

@@ -51,11 +51,7 @@
                 <div class="form-group custom-file-container mb-4" data-upload-id="myFirstImage">
                     <label class="control-label">Kitap Görsel Seçimi </label><br>
                     <div class="card component-card_2 mb-3" style="width:150px">
-                        @if ($book->image != 'no-image/no-image.jpeg')
-                            <img src="{{ asset('uploads/' . $book->image) }}" class="card-img-top" alt="widget-card-2">
-                        @else
-                            <img src="{{ asset('no-image/no-image.jpeg') }}" class="card-img-top" alt="widget-card-2">
-                        @endif
+                        <img src="{{ asset('uploads/' . $book->image) }}" class="card-img-top" alt="widget-card-2">
                     </div>
                     <label class="custom-file-container__custom-file">
                         <input type="file" name="image" class="custom-file-container__custom-file__custom-file-input"
