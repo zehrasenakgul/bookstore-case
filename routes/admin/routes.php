@@ -32,9 +32,9 @@ Route::group(["prefix" => "admin", "as" => "backend", "middleware" => "auth"], f
             Route::redirect('/', '/admin/book/add');
             Route::get("/add", "create")->name(".create");
             Route::post("/add", "store")->name(".store");
-            Route::get("/update/{slug}", "show")->name(".show");
-            Route::put("/update/{slug}", "edit")->name(".edit");
-            Route::get("/delete/{slug}", "destroy")->name(".destroy");
+            Route::get("/update/{book}", "show")->name(".show");
+            Route::put("/update/{book}", "edit")->name(".edit");
+            Route::get("/delete/{book}", "destroy")->name(".destroy");
         });
         Route::redirect('/books', '/admin/books/list');
         Route::get("/books/list", "index")->name(".index");
@@ -44,9 +44,9 @@ Route::group(["prefix" => "admin", "as" => "backend", "middleware" => "auth"], f
             Route::redirect('/', '/admin/author/add');
             Route::get("/add", "create")->name(".create");
             Route::post("/add", "store")->name(".store");
-            Route::get("/update/{slug}", "show")->name(".show");
-            Route::put("/update/{slug}", "edit")->name(".edit");
-            Route::get("/delete/{slug}", "destroy")->name(".destroy");
+            Route::get("/update/{author}", "show")->name(".show");
+            Route::put("/update/{author}", "edit")->name(".edit");
+            Route::get("/delete/{author}", "destroy")->name(".destroy");
         });
         Route::redirect('/authors', '/admin/authors/list');
         Route::get("/authors/list", "index")->name(".index");

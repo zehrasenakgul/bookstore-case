@@ -40,29 +40,20 @@ class AuthorController extends Controller
             return redirect("/admin/authors/list");
         }
     }
-    public function edit(Request $request, $id)
+    public function edit(Request $request, Author $author)
     {
-
         $str = Str::slug($request->input("name"), '-');
-        $author = Author::where("id", $id)->firstOrFail();
-        if ($request->input("status") == "0") {
-            $book = Book::where("author_id", $author->id)->get();
-            foreach ($book as $bookItem) {
-                $bookItem->update([
-                    "status" => "0"
-                ]);
-            }
-        }
-        $author = Author::where("id", $id)->update([
+        $author = Author::where("id", $author->id)->firstOrFail();
+        $author->update([
             "name" => $request->input("name"),
             "status" => $request->input("status"),
             "slug" => $str
         ]);
 
         if ($author) {
-            return redirect("/admin/authors/list");
+            return redirect("/admin/author/update/$author->id")->with('authorUpdateSuccessful', 'Yazar Güncelleme Başarılı!');
         } else {
-            return redirect("/admin/authors/list");
+            return redirect("/admin/author/update/$author->id")->with('authorUpdateFailed', 'Yazar Güncelleme Başarısız!');
         }
     }
     public function destroy($id)
