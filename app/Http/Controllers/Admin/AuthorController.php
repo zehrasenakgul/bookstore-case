@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AuthorPostRequest;
 use App\Models\Book;
 use App\Models\Author;
 use Illuminate\Http\Request;
@@ -24,6 +25,7 @@ class AuthorController extends Controller
     }
     public function show(Author $author)
     {
+
         $author = Author::where("id", $author->id)->firstOrFail();
         return view("admin.authors.update", compact("author"));
     }

@@ -1,6 +1,5 @@
 @extends('layouts.backend')
 @section('content')
-
     <div class="layout-px-spacing">
 
         <div class=" layout-top-spacing">
@@ -15,23 +14,22 @@
             @endif
             <form class="form-vertical" enctype="multipart/form-data" action="{{ url('admin/book/add') }}" method="POST">
                 {{ csrf_field() }}
-                @if ($errors->any())
+                {{-- @if ($errors->any())
                     @foreach ($errors->all as $error)
                         <p>{{ $error }}</p>
                     @endforeach
-                @endif
-
+                @endif --}}
                 <div class="form-group mb-4">
                     <label class="control-label">Kitap Adı:</label>
-                    <input type="text" name="name" class="form-control" required>
+                    <input type="text" name="name" class="form-control">
                 </div>
                 <div class="form-group mb-4">
                     <label class="control-label">Kitap ISBN Numarası:</label>
-                    <input type="number" name="book_no" class="form-control" required>
+                    <input type="number" name="book_no" class="form-control">
                 </div>
                 <div class="form-group mb-4">
                     <label class="control-label">Kitap Yazarı Seçimi</label>
-                    <select class="form-control" name="author_id" id="exampleFormControlSelect1" required>
+                    <select class="form-control" name="author_id" id="exampleFormControlSelect1">
                         @foreach ($authors as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
@@ -47,7 +45,7 @@
                 </div>
                 <div class="form-group mb-4">
                     <label class="control-label">Aktif/Pasif</label>
-                    <select class="form-control" name="status" id="exampleFormControlSelect1" required>
+                    <select class="form-control" name="status" id="exampleFormControlSelect1">
                         <option value="1">Aktif</option>
                         <option value="0">Pasif</option>
                     </select>

@@ -22,6 +22,7 @@ class CreateBooksTable extends Migration
             $table->enum('status', ['0', '1']);
             $table->string("slug");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -25,9 +25,9 @@ class BookPostRequest extends FormRequest
     {
         return [
             "name" => "required",
-            "author_id" => "required|numeric",
+            "author_id" => "required",
             "status" => "required",
-            "book_no" => "required|numeric",
+            "book_no" => "required",
             'image' => 'mimes:png,jpeg,jpg,png',
         ];
     }
