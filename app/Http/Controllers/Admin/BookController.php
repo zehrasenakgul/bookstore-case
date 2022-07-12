@@ -36,7 +36,7 @@ class BookController extends Controller
     {
         $book = new Book();
         if ($request->hasFile('image')) {
-            $filePath = Storage::disk('uploads')->put('books', $request->file("image"), 'public');
+            $filePath = Storage::disk('storage')->put('books', $request->file("image"), 'public');
         } else {
             $filePath = "no-image/no-image.jpeg";
         }
@@ -59,11 +59,14 @@ class BookController extends Controller
     //FormRequest
     public function edit(Request $request, Book $book)
     {
-        $book = Book::where("id", $book->id)->firstOrFail();
-        $filePath = $book->image;
+        $oldbook = Book::where("id", $book->id)->firstOrFail();
+        if ($request->hasFile('image')) {
+            $filePath = Storage::disk('storage')->put('books', $request->file("image"), 'public');
+        } else {
+            $filePath = $oldbook->image;
+        }
         $str = Str::slug($request->name, '-');
-
-        $book->update([
+        $bookUpdate = Book::where("id", $book->id)->update([
             "name" => $request->input('name'),
             "author_id" => $request->input('author_id'),
             "book_no" => $request->input('book_no'),
@@ -71,13 +74,9 @@ class BookController extends Controller
             "image" => $filePath,
             "slug" => $str
         ]);
-
-        if ($book) {
-            if ($request->hasFile('image')) {
-                if ($book->image != "no-image/no-image.jpeg") {
-                    Storage::disk('uploads')->delete($book->image);
-                }
-                $filePath = Storage::disk('uploads')->put('books', $request->file("image"), 'public');
+        if ($bookUpdate) {
+            if ($oldbook->image != "no-image/no-image.jpeg") {
+                Storage::disk('storage')->delete($oldbook->image);
             }
             Session::flash('bookUpdateSuccessful', 'Kitap Güncelleme Başarılı!');
         } else {
@@ -92,7 +91,7 @@ class BookController extends Controller
         $deletedBook->delete();
         if ($deletedBook) {
             if ($book->image != "no-image/no-image.jpeg") {
-                Storage::disk('uploads')->delete($book->image);
+                Storage::disk('storage')->delete($book->image);
             }
             Session::flash('bookDeletionSuccessful', 'Kitap Silme Başarılı!');
         } else {

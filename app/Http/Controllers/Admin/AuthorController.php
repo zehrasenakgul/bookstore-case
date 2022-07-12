@@ -64,17 +64,12 @@ class AuthorController extends Controller
     }
     public function destroy(Author $author)
     {
-        $authors = Author::all();
         //Yazar kaydı silindiğinde yazara ait kitaplar ve o kitaba ait görsel de silinmeli;
         $deletedAuthor = Author::where("id", $author->id)->firstOrFail();
         $deletedAuthor->delete();
-        //yazar silindiyse ona ait kitapları ve görselleri de siliyoruz =>
+        //yazar silindiyse ona ait kitapları da siliyoruz soft-delete =>
         if ($deletedAuthor) {
-            $book = Book::where("author_id", $author->id)->get();
-            foreach ($book as $bookItem) {
-                Storage::disk('uploads')->delete($bookItem->image);
-                $bookItem->delete();
-            }
+            Book::where("author_id", $author->id)->get()->delete();
             Session::flash('authorDeletionSuccessful', 'Yazar Silme Başarılı!');
         } else {
             Session::flash('authorDeletionFailed', 'Yazar Silme Başarısız!');

@@ -24,7 +24,7 @@ class BookPostRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required",
+            "name" => "required|max:255",
             "author_id" => "required",
             "status" => "required",
             "book_no" => "required",
@@ -40,6 +40,7 @@ class BookPostRequest extends FormRequest
             "author_id.required" => "Bu alan zorunludur.",
             "book_no.required" => "Bu alan zorunludur.",
             "status.required" => "Bu alan zorunludur.",
+            "image.mimes" => "Resim jpg,png veya jpeg olmalıdır",
         ];
     }
 }

@@ -14,7 +14,7 @@
                                 <div class="project-grid">
                                     <div class="thumbnail">
                                         <a href="{{ url('/book/' . $item->slug) }}">
-                                            <img src="{{ asset('uploads/' . $item->image) }}" alt="{{ $item->name }}">
+                                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
                                         </a>
                                     </div>
                                     <div class="content">

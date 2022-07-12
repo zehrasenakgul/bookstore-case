@@ -54,7 +54,7 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/admin/login');
+        return view('admin.login.index');
     }
 
     public function login(Request $request)
