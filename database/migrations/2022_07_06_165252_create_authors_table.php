@@ -18,6 +18,7 @@ class CreateAuthorsTable extends Migration
             $table->string("name");
             $table->boolean('status');
             $table->string("slug");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

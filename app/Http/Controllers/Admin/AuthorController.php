@@ -69,7 +69,6 @@ class AuthorController extends Controller
         $deletedAuthor->delete();
         //yazar silindiyse ona ait kitapları da siliyoruz soft-delete =>
         if ($deletedAuthor) {
-            Book::where("author_id", $author->id)->get()->delete();
             Session::flash('authorDeletionSuccessful', 'Yazar Silme Başarılı!');
         } else {
             Session::flash('authorDeletionFailed', 'Yazar Silme Başarısız!');
