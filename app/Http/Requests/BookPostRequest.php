@@ -26,9 +26,9 @@ class BookPostRequest extends FormRequest
         return [
             "name" => "required|max:255",
             "author_id" => "required",
-            "status" => "required",
+            "status" => "required|boolean",
             "book_no" => "required",
-            'image' => 'mimes:png,jpeg,jpg,png',
+            'image' => 'mimes:png,jpeg,jpg,png|max:255',
         ];
     }
 
@@ -40,7 +40,7 @@ class BookPostRequest extends FormRequest
             "author_id.required" => "Bu alan zorunludur.",
             "book_no.required" => "Bu alan zorunludur.",
             "status.required" => "Bu alan zorunludur.",
-            "image.mimes" => "Resim jpg,png veya jpeg olmalıdır",
+            "image.mimes" => "Resim jpg,png veya jpeg olmalıdır.",
         ];
     }
 }
