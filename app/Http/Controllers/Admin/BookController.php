@@ -54,7 +54,7 @@ class BookController extends Controller
         } else {
             Session::flash('bookRegistrationFailed', 'Kitap Kaydı Başarısız!');
         }
-        return $this->index();
+        return redirect()->action([BookController::class, 'index']);
     }
     //FormRequest
     public function edit(Request $request, Book $book)
@@ -97,6 +97,6 @@ class BookController extends Controller
         } else {
             Session::flash('bookDeletionFailed', 'Kitap Silme Başarısız!');
         }
-        return $this->index();
+        return redirect()->action([BookController::class, 'index']);
     }
 }

@@ -42,7 +42,7 @@ class AuthorController extends Controller
         } else {
             Session::flash('authorRegistrationFailed', 'Yazar Kaydı Başarısız!');
         }
-        return $this->index();
+        return redirect()->action([AuthorController::class, 'index']);
     }
     public function edit(Request $request, Author $author)
     {
@@ -73,6 +73,6 @@ class AuthorController extends Controller
         } else {
             Session::flash('authorDeletionFailed', 'Yazar Silme Başarısız!');
         }
-        return $this->index();
+        return redirect()->action([AuthorController::class, 'index']);
     }
 }
