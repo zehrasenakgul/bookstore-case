@@ -19,7 +19,7 @@ Route::group(["prefix" => "admin", "middleware" => "auth"], function () {
         Route::group(["prefix" => "settings"], function () {
             Route::get("/", "index");
             //ajax post işlemi olduğu için type post =>
-            Route::post("/update", "edit");
+            Route::post("/update", "update");
             Route::post("/add", "store");
             Route::post("/delete", "destroy");
         });
@@ -31,7 +31,7 @@ Route::group(["prefix" => "admin", "middleware" => "auth"], function () {
             Route::get("/add", "create");
             Route::post("/add", "store");
             Route::get("/update/{book}", "show");
-            Route::put("/update/{book}", "edit");
+            Route::put("/update/{book}", "update");
             Route::get("/delete/{book}", "destroy");
         });
         Route::redirect('/books', '/admin/books/list');
@@ -43,7 +43,7 @@ Route::group(["prefix" => "admin", "middleware" => "auth"], function () {
             Route::get("/add", "create");
             Route::post("/add", "store");
             Route::get('/update/{author}', 'show');
-            Route::put("/update/{author}", "edit");
+            Route::put("/update/{author}", "update");
             Route::get("/delete/{author}", "destroy");
         });
         Route::redirect('/authors', '/admin/authors/list');

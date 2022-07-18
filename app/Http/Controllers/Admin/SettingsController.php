@@ -15,7 +15,7 @@ class SettingsController extends Controller
         return view("admin.settings.settings", compact("settings"));
     }
 
-    public function edit(Request $request)
+    public function update(Request $request)
     {
         $setting = Setting::where("key", $request->key)->update(["value" => $request->value]);
         Session::flash('settingUpdateSuccessful', 'Ayar Güncelleme Başarılı!');

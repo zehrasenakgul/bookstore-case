@@ -21,7 +21,6 @@ class BookController extends Controller
     }
     public function show(Book $book)
     {
-        $book = Book::where("id", $book->id)->firstOrFail();
         $authors = Author::where("status", "1")->get();
         return view("admin.books.update", compact("authors", "book"));
     }
@@ -57,7 +56,7 @@ class BookController extends Controller
         return redirect()->action([BookController::class, 'index']);
     }
     //FormRequest
-    public function edit(Request $request, Book $book)
+    public function update(Request $request, Book $book)
     {
         $oldbook = Book::where("id", $book->id)->firstOrFail();
         if ($request->hasFile('image')) {
@@ -87,9 +86,8 @@ class BookController extends Controller
 
     public function destroy(Book $book)
     {
-        $deletedBook = Book::where("id", $book->id)->firstOrFail();
-        $deletedBook->delete();
-        if ($deletedBook) {
+        $book->delete();
+        if ($book) {
             if ($book->image != "no-image/no-image.jpeg") {
                 Storage::disk('storage')->delete($book->image);
             }
