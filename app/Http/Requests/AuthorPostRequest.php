@@ -25,7 +25,7 @@ class AuthorPostRequest extends FormRequest
     {
         return [
             "name" => "required|max:255",
-            "status" => "required",
+            "status" => "required|boolean",
             "slug" => "required|max:255",
         ];
     }
