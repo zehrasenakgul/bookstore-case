@@ -50,7 +50,6 @@ class AuthorController extends Controller
 
         if ($author) {
             Session::flash('authorUpdateSuccessful', 'Yazar Güncelleme Başarılı!');
-            // return redirect("/admin/author/update/$author->id")->with('authorUpdateSuccessful', 'Yazar Güncelleme Başarılı!');
         } else {
             Session::flash('authorUpdateFailed', 'Yazar Güncelleme Başarısız!');
         }
@@ -59,11 +58,7 @@ class AuthorController extends Controller
     public function destroy(Author $author)
     {
         $author->delete();
-        if ($author) {
-            Session::flash('authorDeletionSuccessful', 'Yazar Silme Başarılı!');
-        } else {
-            Session::flash('authorDeletionFailed', 'Yazar Silme Başarısız!');
-        }
+        Session::flash('authorDeletionSuccessful', 'Yazar Silme Başarılı!');
         return redirect()->action([AuthorController::class, 'index']);
     }
 }

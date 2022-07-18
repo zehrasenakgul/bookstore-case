@@ -34,12 +34,10 @@ class BookController extends Controller
     public function store(BookPostRequest $request)
     {
         $book = new Book();
+        $filePath = "no-image/no-image.jpeg";
         if ($request->hasFile('image')) {
             $filePath = Storage::disk('storage')->put('books', $request->file("image"), 'public');
-        } else {
-            $filePath = "no-image/no-image.jpeg";
         }
-
         $book->name = $request->input('name');
         $book->book_no = $request->input('book_no');
         $book->author_id = $request->input('author_id');
@@ -87,14 +85,10 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
-        if ($book) {
-            if ($book->image != "no-image/no-image.jpeg") {
-                Storage::disk('storage')->delete($book->image);
-            }
-            Session::flash('bookDeletionSuccessful', 'Kitap Silme Başarılı!');
-        } else {
-            Session::flash('bookDeletionFailed', 'Kitap Silme Başarısız!');
+        if ($book->image != "no-image/no-image.jpeg") {
+            Storage::disk('storage')->delete($book->image);
         }
+        Session::flash('bookDeletionSuccessful', 'Kitap Silme Başarılı!');
         return redirect()->action([BookController::class, 'index']);
     }
 }

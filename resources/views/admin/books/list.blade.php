@@ -6,10 +6,6 @@
                 <div class="alert alert-success">
                     {{ session()->get('bookDeletionSuccessful') }}
                 </div>
-            @elseif (session()->has('bookDeletionFailed'))
-                <div class="alert alert-danger">
-                    {{ session()->get('bookDeletionFailed') }}
-                </div>
             @elseif (session()->has('bookRegistrationSuccessful'))
                 <div class="alert alert-success">
                     {{ session()->get('bookRegistrationSuccessful') }}
