@@ -13,8 +13,6 @@ class CreateBooksTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('books');
-
         //Note: You should make sure, your Authors Table migration is running before Books Table migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
