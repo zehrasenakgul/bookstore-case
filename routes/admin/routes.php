@@ -17,11 +17,10 @@ Route::group(["prefix" => "admin", "middleware" => "auth"], function () {
 
     Route::controller(SettingsController::class)->group(function () {
         Route::group(["prefix" => "settings"], function () {
-            Route::get("/", "index");
-            //ajax post işlemi olduğu için type post =>
-            Route::post("/update", "update");
-            Route::post("/add", "store");
-            Route::post("/delete", "destroy");
+            Route::resource("/", "index");
+            Route::resource("/update", "update");
+            Route::resource("/add", "store");
+            Route::resource("/delete", "destroy");
         });
     });
 
