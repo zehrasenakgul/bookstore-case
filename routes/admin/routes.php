@@ -15,30 +15,37 @@ Route::group(["prefix" => "admin", "middleware" => "auth"], function () {
 
     Route::get("/dashboard", "App\Http\Controllers\Admin\BackendHomeController@index")->name("admin.home.index");
 
-    Route::resource("settings", SettingsController::class);
+    //Formu tüm methodlar için ajax ile post ettiğimden resource için url ve method biçimleri uygun olmuyor.
+    Route::controller(SettingsController::class)->group(function () {
+        Route::group(["prefix" => "settings"], function () {
+            Route::get("/", "index");
+            //ajax post işlemi olduğu için type post =>
+            Route::post("/edit", "edit");
+            Route::post("/create", "store");
+            Route::post("/delete", "destroy");
+        });
+    });
 
     Route::controller(BookController::class)->group(function () {
         Route::group(["prefix" => "book"], function () {
-            Route::redirect('/', '/admin/book/add');
-            Route::get("/add", "create")->name("admin.books.add");
-            Route::post("/add", "store")->name("books.store");
-            Route::get("/update/{book}", "show")->name("admin.books.update");
-            Route::put("/update/{book}", "update")->name("books.update");
-            Route::get("/delete/{book}", "destroy")->name("books.destroy");
+            Route::redirect('/', '/admin/book/create');
+            Route::get("/create", "create")->name("books.create");
+            Route::post("/", "store")->name("books.store");
+            Route::get("/{book}", "edit")->name("books.edit");
+            Route::put("/{book}", "update")->name("books.update");
+            Route::delete("/{book}", "destroy")->name("books.destroy");
         });
-        Route::redirect('/books', '/admin/books/list');
-        Route::get("/books/list", "index")->name("admin.books.list");
+        Route::get("/books", "index")->name("books.list");
     });
     Route::controller(AuthorController::class)->group(function () {
         Route::group(["prefix" => "author"], function () {
-            Route::redirect('/', '/admin/author/add');
-            Route::get("/add", "create")->name("admin.authors.add");
-            Route::post("/add", "store")->name("authors.store");
-            Route::get('/update/{author}', 'show')->name("admin.authors.update");;
-            Route::put("/update/{author}", "update")->name("authors.update");
-            Route::get("/delete/{author}", "destroy")->name("authors.destroy");
+            Route::redirect('/', '/admin/author/create');
+            Route::get("/create", "create")->name("authors.create");
+            Route::post("/", "store")->name("authors.store");
+            Route::get("/{author}", "edit")->name("authors.edit");
+            Route::put("/{author}", "update")->name("authors.update");
+            Route::delete("/{author}", "destroy")->name("authors.destroy");
         });
-        Route::redirect('/authors', '/admin/authors/list');
-        Route::get("/authors/list", "index")->name("admin.authors.list");
+        Route::get("/authors", "index")->name("authors.list");
     });
 });

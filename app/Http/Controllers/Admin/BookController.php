@@ -20,7 +20,7 @@ class BookController extends Controller
         $authors = Author::where("status", "1")->get();
         return view("admin.books.add", compact("authors"));
     }
-    public function show(Book $book)
+    public function edit(Book $book)
     {
         $authors = Author::where("status", "1")->get();
         return view("admin.books.update", compact("authors", "book"));
@@ -48,30 +48,30 @@ class BookController extends Controller
         $book->slug = $str;
         $book->save();
         Session::flash('alertSuccessMessage', 'Kitap Kaydı Başarılı!');
-        return redirect()->route("admin.books.list");
+        return redirect()->route("books.list");
     }
     //FormRequest
     public function update(Request $request, Book $book)
     {
         $filePath = $book->image;
         if ($request->hasFile('image')) {
-            $filePath = Storage::disk('storage')->put('books', $request->file("image"), 'public');
             if ($book->image != noImagePath::PATH) {
                 Storage::disk('storage')->delete($book->image);
             }
+            $filePath = Storage::disk('storage')->put('books', $request->file("image"), 'public');
         }
         $str = Str::slug($request->name, '-');
-        $book->update([
-            "name" => $request->input('name'),
-            "author_id" => $request->input('author_id'),
-            "book_no" => $request->input('book_no'),
-            "status" => $request->input('status'),
-            "image" => $filePath,
-            "slug" => $str
-        ]);
+        $book->name = $request->input('name');
+        $book->book_no = $request->input('book_no');
+        $book->author_id = $request->input('author_id');
+        $book->status = $request->input('status');
+        $book->image = $filePath;
+        $str = Str::slug($request->name, '-');
+        $book->slug = $str;
+        $book->save();
         Session::flash('alertSuccessMessage', 'Kitap Güncelleme Başarılı!');
         // return redirect()->action([BookController::class, 'index']);
-        return redirect()->route("admin.books.list");
+        return redirect()->route("books.list");
     }
 
     public function destroy(Book $book)
@@ -82,6 +82,6 @@ class BookController extends Controller
         // }
         $book->delete();
         Session::flash('alertSuccessMessage', 'Kitap Silme Başarılı!');
-        return redirect()->route("admin.books.list");
+        return redirect()->route("books.list");
     }
 }

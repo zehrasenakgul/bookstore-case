@@ -10,17 +10,9 @@
                 </svg>
                 Yeni Ekle</button>
 
-            @if (session()->has('settingRegistrationSuccessful'))
+            @if (session()->has('alertSuccessMessage'))
                 <div class="alert alert-success">
-                    {{ session()->get('settingRegistrationSuccessful') }}
-                </div>
-            @elseif (session()->has('settingUpdateSuccessful'))
-                <div class="alert alert-success">
-                    {{ session()->get('settingUpdateSuccessful') }}
-                </div>
-            @elseif (session()->has('settingDeletionSuccessful'))
-                <div class="alert alert-success">
-                    {{ session()->get('settingDeletionSuccessful') }}
+                    {{ session()->get('alertSuccessMessage') }}
                 </div>
             @endif
 
@@ -57,7 +49,7 @@
                 var input = $(this);
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('admin/settings/update') }}",
+                    url: "{{ url('admin/settings/edit') }}",
                     data: {
                         _token: "{{ csrf_token() }}",
                         key: input.attr("name"),
@@ -100,7 +92,7 @@
                 var value = $("#newSettingValue").val();
                 $.ajax({
                     type: "post",
-                    url: "{{ url('admin/settings/add') }}",
+                    url: "{{ url('admin/settings/create') }}",
                     data: {
                         _token: "{{ csrf_token() }}",
                         key: key,

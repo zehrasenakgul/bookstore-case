@@ -4,8 +4,8 @@
     <div class="layout-px-spacing">
         <div class=" layout-top-spacing">
 
-            <form class="form-vertical" enctype="multipart/form-data"
-                action="{{ url('admin/author/update/' . $author->id) }}" method="POST">
+            <form class="form-vertical" enctype="multipart/form-data" action="{{ url('admin/author/' . $author->id) }}"
+                method="POST">
                 <input type="hidden" name="_method" value="PUT">
 
                 {{ csrf_field() }}

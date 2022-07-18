@@ -17,8 +17,8 @@ class SettingsController extends Controller
 
     public function update(Request $request)
     {
-        $setting = Setting::where("key", $request->key)->update(["value" => $request->value]);
-        Session::flash('settingUpdateSuccessful', 'Ayar Güncelleme Başarılı!');
+        Setting::where("key", $request->key)->update(["value" => $request->value]);
+        Session::flash('alertSuccessMessage', 'Ayar Güncelleme Başarılı!');
     }
 
     public function store(Request $request)
@@ -28,12 +28,12 @@ class SettingsController extends Controller
         $setting->key = $request->key;
         $setting->value = $request->value;
         $setting->save();
-        Session::flash('settingRegistrationSuccessful', 'Ayar Kaydı Başarılı!');
+        Session::flash('alertSuccessMessage', 'Ayar Kaydı Başarılı!');
     }
 
     public function destroy(Request $request)
     {
-        $setting = Setting::where("key", $request->key)->delete();
-        Session::flash('settingDeletionSuccessful', 'Ayar Silme Başarılı!');
+        Setting::where("key", $request->key)->delete();
+        Session::flash('alertSuccessMessage', 'Ayar Silme Başarılı!');
     }
 }

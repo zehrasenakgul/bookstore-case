@@ -185,12 +185,12 @@
                         </a>
                         <ul class="collapse submenu list-unstyled {{ request()->is('admin/book*') ? 'show' : '' }}  "
                             id="books" data-parent="#accordionExample">
-                            <li @if (request()->is('admin/book/add')) class="active" @endif>
-                                <a href="{{ url('/admin/book/add') }}">
+                            <li @if (request()->is('admin/book/create')) class="active" @endif>
+                                <a href="{{ url('/admin/book/create') }}">
                                     Ekle </a>
                             </li>
-                            <li @if (request()->is('admin/books/list')) class="active" @endif>
-                                <a href="{{ url('/admin/books/list') }}"> Listele </a>
+                            <li @if (request()->is('admin/books')) class="active" @endif>
+                                <a href="{{ url('/admin/books') }}"> Listele </a>
                             </li>
                         </ul>
                     </li>
@@ -220,11 +220,11 @@
                         </a>
                         <ul class="collapse submenu list-unstyled {{ request()->is('admin/author*') ? 'show' : '' }} "
                             id="authors" data-parent="#accordionExample">
-                            <li @if (request()->is('admin/author/add')) class="active" @endif>
-                                <a href="{{ url('/admin/author/add') }}"> Ekle </a>
+                            <li @if (request()->is('admin/author/create')) class="active" @endif>
+                                <a href="{{ url('/admin/author/create') }}"> Ekle </a>
                             </li>
-                            <li @if (request()->is('admin/authors/list')) class="active" @endif>
-                                <a href="{{ url('/admin/authors/list') }}"> Listele </a>
+                            <li @if (request()->is('admin/authors')) class="active" @endif>
+                                <a href="{{ url('/admin/authors') }}"> Listele </a>
                             </li>
                         </ul>
                     </li>
