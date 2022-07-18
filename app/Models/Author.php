@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Author extends Model
 {
     use SoftDeletes, SoftCascadeTrait;
-
+    use HasFactory;
     protected $softCascade = ['books'];
     protected $fillable = ["name", "status"];
     protected $casts = [
@@ -20,5 +20,4 @@ class Author extends Model
     {
         return $this->hasMany(Book::class, "author_id", "id");
     }
-    use HasFactory;
 }

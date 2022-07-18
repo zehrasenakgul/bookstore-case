@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Book extends Model
 {
     //SoftDelete => $book = Book::onlyTrashed()->get(); -> sadece silinenleri gösterir.
+
+    use HasFactory;
+    use SoftDeletes;
     protected $table = "Books";
     protected $fillable  = ["name", "author_id", "book_no", "status"];
     protected $casts = [
@@ -18,6 +21,4 @@ class Book extends Model
     {
         return $this->hasOne(Author::class, "id", "author_id");
     }
-    use HasFactory;
-    use SoftDeletes;
 }
