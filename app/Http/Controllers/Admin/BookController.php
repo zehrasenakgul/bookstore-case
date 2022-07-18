@@ -47,7 +47,7 @@ class BookController extends Controller
         $str = Str::slug($request->name, '-');
         $book->slug = $str;
         $book->save();
-        Session::flash('bookRegistrationSuccessful', 'Kitap Kaydı Başarılı!');
+        Session::flash('alertSuccessMessage', 'Kitap Kaydı Başarılı!');
         return redirect()->route("admin.books.list");
     }
     //FormRequest
@@ -69,7 +69,7 @@ class BookController extends Controller
             "image" => $filePath,
             "slug" => $str
         ]);
-        Session::flash('bookUpdateSuccessful', 'Kitap Güncelleme Başarılı!');
+        Session::flash('alertSuccessMessage', 'Kitap Güncelleme Başarılı!');
         // return redirect()->action([BookController::class, 'index']);
         return redirect()->route("admin.books.list");
     }
@@ -81,7 +81,7 @@ class BookController extends Controller
         //     Storage::disk('storage')->delete($book->image);
         // }
         $book->delete();
-        Session::flash('bookDeletionSuccessful', 'Kitap Silme Başarılı!');
+        Session::flash('alertSuccessMessage', 'Kitap Silme Başarılı!');
         return redirect()->route("admin.books.list");
     }
 }

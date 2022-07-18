@@ -2,17 +2,9 @@
 @section('content')
     <div class="layout-px-spacing">
         <div class=" layout-top-spacing">
-            @if (session()->has('authorDeletionSuccessful'))
+            @if (session()->has('alertSuccessMessage'))
                 <div class="alert alert-success">
-                    {{ session()->get('authorDeletionSuccessful') }}
-                </div>
-            @elseif (session()->has('authorRegistrationSuccessful'))
-                <div class="alert alert-success">
-                    {{ session()->get('authorRegistrationSuccessful') }}
-                </div>
-            @elseif (session()->has('authorUpdateSuccessful'))
-                <div class="alert alert-success">
-                    {{ session()->get('authorUpdateSuccessful') }}
+                    {{ session()->get('alertSuccessMessage') }}
                 </div>
             @endif
             <div class="table-responsive">
