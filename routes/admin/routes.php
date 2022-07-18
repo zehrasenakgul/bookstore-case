@@ -15,14 +15,7 @@ Route::group(["prefix" => "admin", "middleware" => "auth"], function () {
 
     Route::get("/dashboard", "App\Http\Controllers\Admin\BackendHomeController@index")->name("admin.home.index");
 
-    Route::controller(SettingsController::class)->group(function () {
-        Route::group(["prefix" => "settings"], function () {
-            Route::resource("/", "index");
-            Route::resource("/update", "update");
-            Route::resource("/add", "store");
-            Route::resource("/delete", "destroy");
-        });
-    });
+    Route::resource("settings", SettingsController::class);
 
     Route::controller(BookController::class)->group(function () {
         Route::group(["prefix" => "book"], function () {
