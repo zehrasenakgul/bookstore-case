@@ -18,6 +18,14 @@
                 <div class="alert alert-danger">
                     {{ session()->get('authorRegistrationFailed') }}
                 </div>
+            @elseif (session()->has('authorUpdateSuccessful'))
+                <div class="alert alert-success">
+                    {{ session()->get('authorUpdateSuccessful') }}
+                </div>
+            @elseif (session()->has('authorUpdateFailed'))
+                <div class="alert alert-danger">
+                    {{ session()->get('authorUpdateFailed') }}
+                </div>
             @endif
             <div class="table-responsive">
                 <table class="table table-bordered table-hover table-condensed mb-4">

@@ -54,7 +54,7 @@ class AuthorController extends Controller
         } else {
             Session::flash('authorUpdateFailed', 'Yazar Güncelleme Başarısız!');
         }
-        return $this->show($author);
+        return redirect()->action([AuthorController::class, 'index']);
     }
     public function destroy(Author $author)
     {

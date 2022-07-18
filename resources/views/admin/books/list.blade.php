@@ -18,6 +18,14 @@
                 <div class="alert alert-danger">
                     {{ session()->get('bookRegistrationFailed') }}
                 </div>
+            @elseif (session()->has('bookUpdateSuccessful'))
+                <div class="alert alert-success">
+                    {{ session()->get('bookUpdateSuccessful') }}
+                </div>
+            @elseif (session()->has('bookUpdateFailed'))
+                <div class="alert alert-danger">
+                    {{ session()->get('bookUpdateFailed') }}
+                </div>
             @endif
             <div class="table-responsive">
                 <table class="table table-bordered table-hover table-condensed mb-4">

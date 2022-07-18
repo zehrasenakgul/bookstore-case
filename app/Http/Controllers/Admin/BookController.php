@@ -81,7 +81,7 @@ class BookController extends Controller
         } else {
             Session::flash('bookUpdateFailed', 'Kitap Güncelleme Başarısız!');
         }
-        return $this->show($book);
+        return redirect()->action([BookController::class, 'index']);
     }
 
     public function destroy(Book $book)
