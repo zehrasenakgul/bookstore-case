@@ -34,7 +34,7 @@ class AuthorController extends Controller
         $author->slug = $str;
         $author->save();
         Session::flash('authorRegistrationSuccessful', 'Yazar Kaydı Başarılı!');
-        return redirect()->action([AuthorController::class, 'index']);
+        return redirect()->route("admin.authors.list");
     }
     public function update(Request $request, Author $author)
     {
@@ -46,12 +46,12 @@ class AuthorController extends Controller
         ]);
 
         Session::flash('authorUpdateSuccessful', 'Yazar Güncelleme Başarılı!');
-        return redirect()->action([AuthorController::class, 'index']);
+        return redirect()->route("admin.authors.list");
     }
     public function destroy(Author $author)
     {
         $author->delete();
         Session::flash('authorDeletionSuccessful', 'Yazar Silme Başarılı!');
-        return redirect()->action([AuthorController::class, 'index']);
+        return redirect()->route("admin.authors.list");
     }
 }

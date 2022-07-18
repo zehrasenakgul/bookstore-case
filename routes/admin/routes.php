@@ -20,25 +20,25 @@ Route::group(["prefix" => "admin", "middleware" => "auth"], function () {
     Route::controller(BookController::class)->group(function () {
         Route::group(["prefix" => "book"], function () {
             Route::redirect('/', '/admin/book/add');
-            Route::get("/add", "create");
-            Route::post("/add", "store");
-            Route::get("/update/{book}", "show");
-            Route::put("/update/{book}", "update");
-            Route::get("/delete/{book}", "destroy");
+            Route::get("/add", "create")->name("admin.books.add");
+            Route::post("/add", "store")->name("books.store");
+            Route::get("/update/{book}", "show")->name("admin.books.update");
+            Route::put("/update/{book}", "update")->name("books.update");
+            Route::get("/delete/{book}", "destroy")->name("books.destroy");
         });
         Route::redirect('/books', '/admin/books/list');
-        Route::get("/books/list", "index");
+        Route::get("/books/list", "index")->name("admin.books.list");
     });
     Route::controller(AuthorController::class)->group(function () {
         Route::group(["prefix" => "author"], function () {
             Route::redirect('/', '/admin/author/add');
-            Route::get("/add", "create");
-            Route::post("/add", "store");
-            Route::get('/update/{author}', 'show');
-            Route::put("/update/{author}", "update");
-            Route::get("/delete/{author}", "destroy");
+            Route::get("/add", "create")->name("admin.authors.add");
+            Route::post("/add", "store")->name("authors.store");
+            Route::get('/update/{author}', 'show')->name("admin.authors.update");;
+            Route::put("/update/{author}", "update")->name("authors.update");
+            Route::get("/delete/{author}", "destroy")->name("authors.destroy");
         });
         Route::redirect('/authors', '/admin/authors/list');
-        Route::get("/authors/list", "index");
+        Route::get("/authors/list", "index")->name("admin.authors.list");
     });
 });

@@ -48,7 +48,7 @@ class BookController extends Controller
         $book->slug = $str;
         $book->save();
         Session::flash('bookRegistrationSuccessful', 'Kitap Kaydı Başarılı!');
-        return redirect()->action([BookController::class, 'index']);
+        return redirect()->route("admin.books.list");
     }
     //FormRequest
     public function update(Request $request, Book $book)
@@ -70,7 +70,8 @@ class BookController extends Controller
             "slug" => $str
         ]);
         Session::flash('bookUpdateSuccessful', 'Kitap Güncelleme Başarılı!');
-        return redirect()->action([BookController::class, 'index']);
+        // return redirect()->action([BookController::class, 'index']);
+        return redirect()->route("admin.books.list");
     }
 
     public function destroy(Book $book)
@@ -81,6 +82,6 @@ class BookController extends Controller
         // }
         $book->delete();
         Session::flash('bookDeletionSuccessful', 'Kitap Silme Başarılı!');
-        return redirect()->action([BookController::class, 'index']);
+        return redirect()->route("admin.books.list");
     }
 }
