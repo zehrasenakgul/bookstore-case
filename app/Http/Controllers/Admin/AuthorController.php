@@ -31,12 +31,8 @@ class AuthorController extends Controller
         $author->status = $request->input("status");
         $str = Str::slug($request->input("name"), '-');
         $author->slug = $str;
-
-        if ($author->save()) {
-            Session::flash('authorRegistrationSuccessful', 'Yazar Kaydı Başarılı!');
-        } else {
-            Session::flash('authorRegistrationFailed', 'Yazar Kaydı Başarısız!');
-        }
+        $author->save();
+        Session::flash('authorRegistrationSuccessful', 'Yazar Kaydı Başarılı!');
         return redirect()->action([AuthorController::class, 'index']);
     }
     public function update(Request $request, Author $author)
@@ -48,11 +44,7 @@ class AuthorController extends Controller
             "slug" => $str
         ]);
 
-        if ($author) {
-            Session::flash('authorUpdateSuccessful', 'Yazar Güncelleme Başarılı!');
-        } else {
-            Session::flash('authorUpdateFailed', 'Yazar Güncelleme Başarısız!');
-        }
+        Session::flash('authorUpdateSuccessful', 'Yazar Güncelleme Başarılı!');
         return redirect()->action([AuthorController::class, 'index']);
     }
     public function destroy(Author $author)

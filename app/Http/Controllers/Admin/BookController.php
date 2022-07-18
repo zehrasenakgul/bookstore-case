@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\noImagePath;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Book;
@@ -34,7 +35,7 @@ class BookController extends Controller
     public function store(BookPostRequest $request)
     {
         $book = new Book();
-        $filePath = "no-image/no-image.jpeg";
+        $filePath = noImagePath::PATH;
         if ($request->hasFile('image')) {
             $filePath = Storage::disk('storage')->put('books', $request->file("image"), 'public');
         }
@@ -45,25 +46,22 @@ class BookController extends Controller
         $book->image = $filePath;
         $str = Str::slug($request->name, '-');
         $book->slug = $str;
-
-        if ($book->save()) {
-            Session::flash('bookRegistrationSuccessful', 'Kitap Kaydı Başarılı!');
-        } else {
-            Session::flash('bookRegistrationFailed', 'Kitap Kaydı Başarısız!');
-        }
+        $book->save();
+        Session::flash('bookRegistrationSuccessful', 'Kitap Kaydı Başarılı!');
         return redirect()->action([BookController::class, 'index']);
     }
     //FormRequest
     public function update(Request $request, Book $book)
     {
-        $oldbook = Book::where("id", $book->id)->firstOrFail();
+        $filePath = $book->image;
         if ($request->hasFile('image')) {
             $filePath = Storage::disk('storage')->put('books', $request->file("image"), 'public');
-        } else {
-            $filePath = $oldbook->image;
+            if ($book->image != noImagePath::PATH) {
+                Storage::disk('storage')->delete($book->image);
+            }
         }
         $str = Str::slug($request->name, '-');
-        $bookUpdate = Book::where("id", $book->id)->update([
+        $book->update([
             "name" => $request->input('name'),
             "author_id" => $request->input('author_id'),
             "book_no" => $request->input('book_no'),
@@ -71,23 +69,17 @@ class BookController extends Controller
             "image" => $filePath,
             "slug" => $str
         ]);
-        if ($bookUpdate) {
-            if ($oldbook->image != "no-image/no-image.jpeg") {
-                Storage::disk('storage')->delete($oldbook->image);
-            }
-            Session::flash('bookUpdateSuccessful', 'Kitap Güncelleme Başarılı!');
-        } else {
-            Session::flash('bookUpdateFailed', 'Kitap Güncelleme Başarısız!');
-        }
+        Session::flash('bookUpdateSuccessful', 'Kitap Güncelleme Başarılı!');
         return redirect()->action([BookController::class, 'index']);
     }
 
     public function destroy(Book $book)
     {
+        //soft delete yaptığımız için bu işleme gerek yok görseli silmiyor ;
+        // if ($book->image != noImagePath::PATH) {
+        //     Storage::disk('storage')->delete($book->image);
+        // }
         $book->delete();
-        if ($book->image != "no-image/no-image.jpeg") {
-            Storage::disk('storage')->delete($book->image);
-        }
         Session::flash('bookDeletionSuccessful', 'Kitap Silme Başarılı!');
         return redirect()->action([BookController::class, 'index']);
     }

@@ -28,10 +28,9 @@ class BookPostRequest extends FormRequest
             "author_id" => "required",
             "status" => "required|boolean",
             "book_no" => "required",
-            'image' => 'mimes:png,jpeg,jpg,png|max:255',
+            'image' => 'mimes:png,jpeg,jpg,PNG,JPG,JPEG|max:255',
         ];
     }
-
 
     public function messages()
     {
