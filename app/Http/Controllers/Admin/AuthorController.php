@@ -22,7 +22,7 @@ class AuthorController extends Controller
         return view('admin.authors.list', compact('authors'));
     }
 
-    public function show(Author $author)
+    public function edit(Author $author)
     {
         return view('admin.authors.update', compact('author'));
     }
