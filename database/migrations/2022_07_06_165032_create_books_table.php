@@ -13,15 +13,18 @@ class CreateBooksTable extends Migration
      */
     public function up()
     {
+        //Note: You should make sure, your Authors Table migration is running before Books Table migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->integer("author_id");
-            $table->string("image");
-            $table->string("book_no");
-            $table->enum('status', ['0', '1']);
-            $table->string("slug");
+            $table->bigInteger('author_id')->unsigned()->nullable();
+            $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
+            $table->string('name');
+            $table->string('image');
+            $table->integer('book_no');
+            $table->boolean('status');
+            $table->string('slug');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

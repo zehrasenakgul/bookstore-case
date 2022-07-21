@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Setting extends Model
 {
-    protected $tableName = "settings";
-    public $timestamps = false;
     use HasFactory;
+    protected $tableName = 'settings';
+    public $timestamps = false;
 }

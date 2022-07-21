@@ -19,7 +19,7 @@
                 <div class="col-lg-6">
                     <div class="banner-thumbnail sal-animate" data-sal="slide-up" data-sal-duration="1000"
                         data-sal-delay="400">
-                        <img class="paralax-image" src="{{ asset('uploads/' . $book->image) }}" alt="{{ $book->name }}">
+                        <img class="paralax-image" src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}">
 
                     </div>
                 </div>

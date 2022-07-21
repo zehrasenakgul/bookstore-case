@@ -10,6 +10,12 @@
                 </svg>
                 Yeni Ekle</button>
 
+            @if (session()->has('alertSuccessMessage'))
+                <div class="alert alert-success">
+                    {{ session()->get('alertSuccessMessage') }}
+                </div>
+            @endif
+
             <div class="table-responsive">
                 <table class="table table-bordered table-hover table-condensed mb-4">
                     <thead>
@@ -51,14 +57,7 @@
                     },
 
                     success: function(response) {
-
-                        console.log("Başarılı");
-                        console.log(response);
-                    },
-
-                    error: function(response) {
-                        console.log("Hatalı");
-                        console.log(response);
+                        location.reload();
                     }
                 });
             });
@@ -93,23 +92,15 @@
                 var value = $("#newSettingValue").val();
                 $.ajax({
                     type: "post",
-                    url: "{{ url('admin/settings/add') }}",
+                    url: "{{ url('admin/settings/create') }}",
                     data: {
                         _token: "{{ csrf_token() }}",
                         key: key,
                         value: value
                     },
                     success: function(response) {
-                        if (response.status == "success") {
-                            location.reload();
-                        }
-                        console.log(response);
-                    },
-                    error: function(response) {
-                        console.log(response);
+                        location.reload();
                     }
-
-
                 })
             };
 
@@ -123,15 +114,10 @@
                         key: button.data("key")
                     },
                     success: function(response) {
-                        if (response.status == "success") {
-                            button.closest("tr").remove();
-                            location.reload();
-                        }
-                        console.log(response);
+                        button.closest("tr").remove();
+                        location.reload();
                     },
-                    error: function(response) {
-                        console.log(response);
-                    }
+                    error: function(response) {}
 
                 });
             });

@@ -24,22 +24,22 @@ class BookPostRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required",
-            "author_id" => "required|numeric",
-            "status" => "required",
-            "book_no" => "required|numeric",
-            'image' => 'mimes:png,jpeg,jpg,png',
+            'name' => 'required|max:255',
+            'author_id' => 'required',
+            'status' => 'required|boolean',
+            'book_no' => 'required',
+            'image' => 'mimes:png,jpeg,jpg,PNG,JPG,JPEG|max:255',
         ];
     }
-
 
     public function messages()
     {
         return [
-            "name.required" => "Bu alan zorunludur.",
-            "author_id.required" => "Bu alan zorunludur.",
-            "book_no.required" => "Bu alan zorunludur.",
-            "status.required" => "Bu alan zorunludur.",
+            'name.required' => 'Bu alan zorunludur.',
+            'author_id.required' => 'Bu alan zorunludur.',
+            'book_no.required' => 'Bu alan zorunludur.',
+            'status.required' => 'Bu alan zorunludur.',
+            'image.mimes' => 'Resim jpg,png veya jpeg olmalıdır.',
         ];
     }
 }
