@@ -3,21 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class SettingsController extends Controller
 {
     public function index()
     {
         $settings = Setting::all();
-        return view("admin.settings.settings", compact("settings"));
+
+        return view('admin.settings.settings', compact('settings'));
     }
 
     public function update(Request $request)
     {
-        Setting::where("key", $request->key)->update(["value" => $request->value]);
+        Setting::where('key', $request->key)->update(['value' => $request->value]);
         Session::flash('alertSuccessMessage', 'Ayar Güncelleme Başarılı!');
     }
 
@@ -33,7 +34,7 @@ class SettingsController extends Controller
 
     public function destroy(Request $request)
     {
-        Setting::where("key", $request->key)->delete();
+        Setting::where('key', $request->key)->delete();
         Session::flash('alertSuccessMessage', 'Ayar Silme Başarılı!');
     }
 }

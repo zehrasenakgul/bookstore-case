@@ -35,10 +35,9 @@ class LoginController extends Controller
      *
      * @return void
      */
-
     public function showLoginForm()
     {
-        return view("admin.login.index");
+        return view('admin.login.index');
     }
 
     public function __construct()

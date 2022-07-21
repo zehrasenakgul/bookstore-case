@@ -12,13 +12,14 @@ class Book extends Model
 
     use HasFactory;
     use SoftDeletes;
-    protected $table = "Books";
-    protected $fillable  = ["name", "author_id", "book_no", "status"];
+    protected $table = 'Books';
+    protected $fillable = ['name', 'author_id', 'book_no', 'status'];
     protected $casts = [
         'status' => 'boolean',
     ];
+
     public function author()
     {
-        return $this->hasOne(Author::class, "id", "author_id");
+        return $this->hasOne(Author::class, 'id', 'author_id');
     }
 }

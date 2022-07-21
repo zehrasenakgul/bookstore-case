@@ -24,10 +24,10 @@ class BookPostRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required|max:255",
-            "author_id" => "required",
-            "status" => "required|boolean",
-            "book_no" => "required",
+            'name' => 'required|max:255',
+            'author_id' => 'required',
+            'status' => 'required|boolean',
+            'book_no' => 'required',
             'image' => 'mimes:png,jpeg,jpg,PNG,JPG,JPEG|max:255',
         ];
     }
@@ -35,11 +35,11 @@ class BookPostRequest extends FormRequest
     public function messages()
     {
         return [
-            "name.required" => "Bu alan zorunludur.",
-            "author_id.required" => "Bu alan zorunludur.",
-            "book_no.required" => "Bu alan zorunludur.",
-            "status.required" => "Bu alan zorunludur.",
-            "image.mimes" => "Resim jpg,png veya jpeg olmalıdır.",
+            'name.required' => 'Bu alan zorunludur.',
+            'author_id.required' => 'Bu alan zorunludur.',
+            'book_no.required' => 'Bu alan zorunludur.',
+            'status.required' => 'Bu alan zorunludur.',
+            'image.mimes' => 'Resim jpg,png veya jpeg olmalıdır.',
         ];
     }
 }

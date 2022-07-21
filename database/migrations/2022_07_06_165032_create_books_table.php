@@ -18,11 +18,11 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->bigInteger('author_id')->unsigned()->nullable();
             $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
-            $table->string("name");
-            $table->string("image");
-            $table->integer("book_no");
+            $table->string('name');
+            $table->string('image');
+            $table->integer('book_no');
             $table->boolean('status');
-            $table->string("slug");
+            $table->string('slug');
             $table->timestamps();
             $table->softDeletes();
         });

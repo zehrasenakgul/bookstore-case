@@ -8,50 +8,57 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
-
 class AuthorController extends Controller
 {
     public function create()
     {
-        return view("admin.authors.add");
+        return view('admin.authors.add');
     }
+
     public function index()
     {
         $authors = Author::all();
-        return view("admin.authors.list", compact("authors"));
+
+        return view('admin.authors.list', compact('authors'));
     }
+
     public function show(Author $author)
     {
-        return view("admin.authors.update", compact("author"));
+        return view('admin.authors.update', compact('author'));
     }
 
     public function store(Request $request)
     {
         $author = new Author();
-        $author->name = $request->input("name");
-        $author->status = $request->input("status");
-        $str = Str::slug($request->input("name"), '-');
+        $author->name = $request->input('name');
+        $author->status = $request->input('status');
+        $str = Str::slug($request->input('name'), '-');
         $author->slug = $str;
         $author->save();
         Session::flash('alertSuccessMessage', 'Yazar Kaydı Başarılı!');
-        return redirect()->route("authors.list");
+
+        return redirect()->route('authors.list');
     }
+
     public function update(Request $request, Author $author)
     {
-        $str = Str::slug($request->input("name"), '-');
+        $str = Str::slug($request->input('name'), '-');
         $author->update([
-            "name" => $request->input("name"),
-            "status" => $request->input("status"),
-            "slug" => $str
+            'name' => $request->input('name'),
+            'status' => $request->input('status'),
+            'slug' => $str,
         ]);
 
         Session::flash('alertSuccessMessage', 'Yazar Güncelleme Başarılı!');
-        return redirect()->route("authors.list");
+
+        return redirect()->route('authors.list');
     }
+
     public function destroy(Author $author)
     {
         $author->delete();
         Session::flash('alertSuccessMessage', 'Yazar Silme Başarılı!');
-        return redirect()->route("authors.list");
+
+        return redirect()->route('authors.list');
     }
 }

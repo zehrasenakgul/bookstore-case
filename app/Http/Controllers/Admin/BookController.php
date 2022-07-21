@@ -4,31 +4,35 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\noImagePath;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Book;
 use App\Http\Requests\BookPostRequest;
 use App\Models\Author;
+use App\Models\Book;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Session;
-
 
 class BookController extends Controller
 {
     public function create()
     {
-        $authors = Author::where("status", "1")->get();
-        return view("admin.books.add", compact("authors"));
+        $authors = Author::where('status', '1')->get();
+
+        return view('admin.books.add', compact('authors'));
     }
+
     public function edit(Book $book)
     {
-        $authors = Author::where("status", "1")->get();
-        return view("admin.books.update", compact("authors", "book"));
+        $authors = Author::where('status', '1')->get();
+
+        return view('admin.books.update', compact('authors', 'book'));
     }
+
     public function index()
     {
         $books = Book::all();
-        return view("admin.books.list", compact("books"));
+
+        return view('admin.books.list', compact('books'));
     }
 
     //FormRequest
@@ -37,7 +41,7 @@ class BookController extends Controller
         $book = new Book();
         $filePath = noImagePath::PATH;
         if ($request->hasFile('image')) {
-            $filePath = Storage::disk('storage')->put('books', $request->file("image"), 'public');
+            $filePath = Storage::disk('storage')->put('books', $request->file('image'), 'public');
         }
         $book->name = $request->input('name');
         $book->book_no = $request->input('book_no');
@@ -48,8 +52,10 @@ class BookController extends Controller
         $book->slug = $str;
         $book->save();
         Session::flash('alertSuccessMessage', 'Kitap Kaydı Başarılı!');
-        return redirect()->route("books.list");
+
+        return redirect()->route('books.list');
     }
+
     //FormRequest
     public function update(Request $request, Book $book)
     {
@@ -58,7 +64,7 @@ class BookController extends Controller
             if ($book->image != noImagePath::PATH) {
                 Storage::disk('storage')->delete($book->image);
             }
-            $filePath = Storage::disk('storage')->put('books', $request->file("image"), 'public');
+            $filePath = Storage::disk('storage')->put('books', $request->file('image'), 'public');
         }
         $str = Str::slug($request->name, '-');
         $book->name = $request->input('name');
@@ -71,7 +77,7 @@ class BookController extends Controller
         $book->save();
         Session::flash('alertSuccessMessage', 'Kitap Güncelleme Başarılı!');
         // return redirect()->action([BookController::class, 'index']);
-        return redirect()->route("books.list");
+        return redirect()->route('books.list');
     }
 
     public function destroy(Book $book)
@@ -82,6 +88,7 @@ class BookController extends Controller
         // }
         $book->delete();
         Session::flash('alertSuccessMessage', 'Kitap Silme Başarılı!');
-        return redirect()->route("books.list");
+
+        return redirect()->route('books.list');
     }
 }

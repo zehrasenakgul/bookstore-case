@@ -24,9 +24,9 @@ class AuthorPostRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required|max:255",
-            "status" => "required|boolean",
-            "slug" => "required|max:255",
+            'name' => 'required|max:255',
+            'status' => 'required|boolean',
+            'slug' => 'required|max:255',
         ];
     }
 }
