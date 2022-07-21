@@ -49,7 +49,7 @@
                 var input = $(this);
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('admin/settings/edit') }}",
+                    url: "{{ url('admin/settings/update') }}",
                     data: {
                         _token: "{{ csrf_token() }}",
                         key: input.attr("name"),

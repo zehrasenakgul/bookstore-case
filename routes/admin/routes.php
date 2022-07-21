@@ -19,7 +19,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::group(['prefix' => 'settings'], function () {
             Route::get('/', 'index');
             //ajax post işlemi olduğu için type post =>
-            Route::post('/edit', 'edit');
+            Route::post('/update', 'update');
             Route::post('/create', 'store');
             Route::post('/delete', 'destroy');
         });
