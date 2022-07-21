@@ -7,10 +7,9 @@ use App\Models\Book;
 
 class BookController extends Controller
 {
-    public function show(Book $book)
+    public function show($slug)
     {
-        $book = Book::with('author')->where('slug', $book->id)->where('status', '1')->firstOrFail();
-
+        $book = Book::with('author')->where('slug', $slug)->where('status', '1')->firstOrFail();
         return view('frontend.book.index', compact('book'));
     }
 }
