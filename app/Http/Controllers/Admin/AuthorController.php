@@ -19,7 +19,7 @@ class AuthorController extends Controller
     {
         $authors = Author::all();
 
-        return view('admin.authors.list', compact('authors'));
+        return view('admin.authors.index', compact('authors'));
     }
 
     public function edit(Author $author)
@@ -37,7 +37,7 @@ class AuthorController extends Controller
         $author->save();
         Session::flash('alertSuccessMessage', 'Yazar Kaydı Başarılı!');
 
-        return redirect()->route('authors.list');
+        return redirect()->route('authors.index');
     }
 
     public function update(Request $request, Author $author)
@@ -51,7 +51,7 @@ class AuthorController extends Controller
 
         Session::flash('alertSuccessMessage', 'Yazar Güncelleme Başarılı!');
 
-        return redirect()->route('authors.list');
+        return redirect()->route('authors.index');
     }
 
     public function destroy(Author $author)
@@ -59,6 +59,6 @@ class AuthorController extends Controller
         $author->delete();
         Session::flash('alertSuccessMessage', 'Yazar Silme Başarılı!');
 
-        return redirect()->route('authors.list');
+        return redirect()->route('authors.index');
     }
 }

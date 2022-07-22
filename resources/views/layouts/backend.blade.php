@@ -185,8 +185,8 @@
                         </a>
                         <ul class="collapse submenu list-unstyled {{ request()->is('admin/book*') ? 'show' : '' }}  "
                             id="books" data-parent="#accordionExample">
-                            <li @if (request()->is('admin/book/create')) class="active" @endif>
-                                <a href="{{ url('/admin/book/create') }}">
+                            <li @if (request()->is('admin/books/create')) class="active" @endif>
+                                <a href="{{ url('/admin/books/create') }}">
                                     Ekle </a>
                             </li>
                             <li @if (request()->is('admin/books')) class="active" @endif>
@@ -220,8 +220,8 @@
                         </a>
                         <ul class="collapse submenu list-unstyled {{ request()->is('admin/author*') ? 'show' : '' }} "
                             id="authors" data-parent="#accordionExample">
-                            <li @if (request()->is('admin/author/create')) class="active" @endif>
-                                <a href="{{ url('/admin/author/create') }}"> Ekle </a>
+                            <li @if (request()->is('admin/authors/create')) class="active" @endif>
+                                <a href="{{ url('/admin/authors/create') }}"> Ekle </a>
                             </li>
                             <li @if (request()->is('admin/authors')) class="active" @endif>
                                 <a href="{{ url('/admin/authors') }}"> Listele </a>
