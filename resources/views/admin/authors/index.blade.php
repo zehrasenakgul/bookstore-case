@@ -29,7 +29,7 @@
                                 </td>
                                 <td class="text-center">
                                     <ul class="table-controls">
-                                        <li><a href="{{ url('admin/author/' . $item->id) }}" data-toggle="tooltip"
+                                        <li><a href="{{ url('admin/authors/' . $item->id) }}" data-toggle="tooltip"
                                                 data-placement="top" title="" data-original-title="Edit"><svg
                                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -40,7 +40,7 @@
                                                 </svg></a></li>
                                         <li>
                                             <form
-                                                action="{{ route('authors.destroy', ['author' => $item->id]) }}"method="POST">
+                                                action="{{ route('admin.authors.destroy', ['author' => $item->id]) }}"method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateAuthorRequest;
 use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -37,7 +38,7 @@ class AuthorController extends Controller
         $author->save();
         Session::flash('alertSuccessMessage', 'Yazar Kaydı Başarılı!');
 
-        return redirect()->route('authors.index');
+        return redirect()->route('admin.authors.index');
     }
 
     public function update(Request $request, Author $author)
@@ -59,6 +60,6 @@ class AuthorController extends Controller
         $author->delete();
         Session::flash('alertSuccessMessage', 'Yazar Silme Başarılı!');
 
-        return redirect()->route('authors.index');
+        return redirect()->route('admin.authors.index');
     }
 }
