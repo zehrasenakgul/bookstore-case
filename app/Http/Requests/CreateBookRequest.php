@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BookPostRequest extends FormRequest
+class CreateBookRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,8 @@ class BookPostRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'author_id' => 'required',
-            'status' => 'required|boolean',
             'book_no' => 'required',
+            'status' => 'required|boolean',
             'image' => 'mimes:png,jpeg,jpg,PNG,JPG,JPEG|max:255',
         ];
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\noImagePath;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookPostRequest;
+use App\Http\Requests\CreateBookRequest;
 use App\Models\Author;
 use App\Models\Book;
 use Illuminate\Http\Request;
@@ -36,7 +37,7 @@ class BookController extends Controller
     }
 
     //FormRequest
-    public function store(BookPostRequest $request)
+    public function store(CreateBookRequest $request)
     {
         $book = new Book();
         $filePath = noImagePath::PATH;
@@ -52,7 +53,6 @@ class BookController extends Controller
         $book->slug = $str;
         $book->save();
         Session::flash('alertSuccessMessage', 'Kitap Kaydı Başarılı!');
-
         return redirect()->route('admin.books.index');
     }
 

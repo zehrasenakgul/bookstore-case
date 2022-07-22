@@ -26,7 +26,13 @@ class CreateAuthorRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'status' => 'required|boolean',
-            'slug' => 'required|max:255',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'Bu alan zorunludur.',
+            'status.required' => 'Bu alan zorunludur.',
         ];
     }
 }

@@ -14,17 +14,22 @@
 
                 <div class="form-group mb-4">
                     <label class="control-label">Yazar Adı:</label>
-                    <input type="text" name="name" class="form-control" required>
+                    <input type="text" name="name" class="form-control">
+                    @if ($errors->has('name'))
+                        <span class="text-danger text-left">{{ $errors->first('name') }}</span>
+                    @endif
                 </div>
                 <div class="form-group mb-4">
                     <label class="control-label">Aktif/Pasif</label>
-                    <select class="form-control" name="status" id="exampleFormControlSelect1" required>
+                    <select class="form-control" name="status" id="exampleFormControlSelect1">
                         <option value="1">Aktif</option>
                         <option value="0">Pasif</option>
                     </select>
+                    @if ($errors->has('status'))
+                        <span class="text-danger text-left">{{ $errors->first('status') }}</span>
+                    @endif
                 </div>
                 <input type="submit" name="submit" value="Ekle" class="btn btn-primary">
-
             </form>
         </div>
     </div>

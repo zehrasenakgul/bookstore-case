@@ -28,7 +28,7 @@ class AuthorController extends Controller
         return view('admin.authors.update', compact('author'));
     }
 
-    public function store(Request $request)
+    public function store(CreateAuthorRequest $request)
     {
         $author = new Author();
         $author->name = $request->input('name');

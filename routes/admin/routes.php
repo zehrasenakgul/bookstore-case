@@ -30,9 +30,9 @@ Route::group(['prefix' => 'admin', "as" => "admin.", 'middleware' => 'auth'], fu
             Route::get('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/', 'store')->name('store');
-            Route::get('/{author}', 'edit')->name('edit');
-            Route::put('/{author}', 'update')->name('update');
-            Route::delete('/{author}', 'destroy')->name('destroy');
+            Route::get('/{book}', 'edit')->name('edit');
+            Route::put('/{book}', 'update')->name('update');
+            Route::delete('/{book}', 'destroy')->name('destroy');
         });
     });
     Route::controller(AuthorController::class)->group(function () {
