@@ -32,7 +32,7 @@ class BookController extends Controller
     {
         $books = Book::all();
 
-        return view('admin.books.list', compact('books'));
+        return view('admin.books.index', compact('books'));
     }
 
     //FormRequest
@@ -53,7 +53,7 @@ class BookController extends Controller
         $book->save();
         Session::flash('alertSuccessMessage', 'Kitap Kaydı Başarılı!');
 
-        return redirect()->route('books.list');
+        return redirect()->route('admin.books.index');
     }
 
     //FormRequest
@@ -77,7 +77,7 @@ class BookController extends Controller
         $book->save();
         Session::flash('alertSuccessMessage', 'Kitap Güncelleme Başarılı!');
         // return redirect()->action([BookController::class, 'index']);
-        return redirect()->route('books.list');
+        return redirect()->route('admin.books.index');
     }
 
     public function destroy(Book $book)
@@ -89,6 +89,6 @@ class BookController extends Controller
         $book->delete();
         Session::flash('alertSuccessMessage', 'Kitap Silme Başarılı!');
 
-        return redirect()->route('books.list');
+        return redirect()->route('addmin.books.index');
     }
 }
