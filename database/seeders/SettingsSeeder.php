@@ -16,19 +16,19 @@ class SettingsSeeder extends Seeder
     {
         $settingArr = [
             [
-                "key" => "title",
-                "value" => "Moneo Laravel Case | BookStore"
+                'key' => 'title',
+                'value' => 'Moneo Laravel Case | BookStore',
             ],
             [
-                "key" => "description",
-                "value" => "Moneo Laravel Case | BookStore"
+                'key' => 'description',
+                'value' => 'Moneo Laravel Case | BookStore',
             ],
             [
-                "key" => "author",
-                "value" => "Zehra Sena Akgül"
-            ]
+                'key' => 'author',
+                'value' => 'Zehra Sena Akgül',
+            ],
         ];
 
-        DB::table("settings")->insert($settingArr);
+        DB::table('settings')->insert($settingArr);
     }
 }

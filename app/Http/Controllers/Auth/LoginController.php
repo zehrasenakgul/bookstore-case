@@ -35,10 +35,9 @@ class LoginController extends Controller
      *
      * @return void
      */
-
     public function showLoginForm()
     {
-        return view("admin.login.index");
+        return view('admin.login.index');
     }
 
     public function __construct()
@@ -54,7 +53,7 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/admin/login');
+        return view('admin.login.index');
     }
 
     public function login(Request $request)

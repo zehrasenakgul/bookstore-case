@@ -15,6 +15,9 @@
     <link href="{{ asset('assets/backend/css/plugins.css') }}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
 
+
+
+
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
     <link href="plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/backend/css/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css" />
@@ -124,8 +127,10 @@
                 <div class="shadow-bottom"></div>
                 <ul class="list-unstyled menu-categories" id="accordionExample">
                     <li class="menu">
-                        <a href="{{ url('/admin/dashboard') }}" data-active="true" data-toggle="collapse"
-                            aria-expanded="true" aria-expanded="false" class="dropdown-toggle">
+                        <a href="{{ url('/admin/dashboard') }}"
+                            @if (request()->is('admin/dashboard')) data-active="true" data-toggle="collapse"
+                            aria-expanded="true" aria-expanded="false" class="dropdown-toggle"
+                            @else aria-expanded="false" class="dropdown-toggle" @endif>
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -138,7 +143,10 @@
                         </a>
                     </li>
                     <li class="menu">
-                        <a href="{{ url('/admin/settings') }}" aria-expanded="false" class="dropdown-toggle">
+                        <a href="{{ url('/admin/settings') }}"
+                            @if (request()->is('admin/settings')) data-active="true" data-toggle="collapse"
+                            aria-expanded="true" aria-expanded="false" class="dropdown-toggle"
+                            @else aria-expanded="false" class="dropdown-toggle" @endif>
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -153,7 +161,10 @@
                         </a>
                     </li>
                     <li class="menu">
-                        <a href="#books" data-toggle="collapse" class="dropdown-toggle">
+                        <a href="#books"
+                            @if (request()->is('admin/book*')) data-active="true" data-toggle="collapse"
+                            aria-expanded="true" aria-expanded="false" class="dropdown-toggle"
+                            @else data-toggle="collapse" class="dropdown-toggle" @endif>
                             <div class="">
                                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
                                     stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -172,18 +183,23 @@
                                 </svg>
                             </div>
                         </a>
-                        <ul class="collapse submenu list-unstyled " id="books" data-parent="#accordionExample">
-                            <li>
-                                <a href="{{ url('/admin/book/add') }}"> Ekle </a>
+                        <ul class="collapse submenu list-unstyled {{ request()->is('admin/book*') ? 'show' : '' }}  "
+                            id="books" data-parent="#accordionExample">
+                            <li @if (request()->is('admin/books/create')) class="active" @endif>
+                                <a href="{{ url('/admin/books/create') }}">
+                                    Ekle </a>
                             </li>
-                            <li>
-                                <a href="{{ url('/admin/books/list') }}"> Listele </a>
+                            <li @if (request()->is('admin/books')) class="active" @endif>
+                                <a href="{{ url('/admin/books') }}"> Listele </a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="menu">
-                        <a href="#authors" data-toggle="collapse" class="dropdown-toggle">
+                        <a href="#authors"
+                            @if (request()->is('admin/author*')) data-active="true" data-toggle="collapse"
+                            aria-expanded="true" aria-expanded="false" class="dropdown-toggle"
+                            @else data-toggle="collapse" class="dropdown-toggle" @endif>
                             <div class="">
                                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
                                     stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -202,12 +218,13 @@
                                 </svg>
                             </div>
                         </a>
-                        <ul class="collapse submenu list-unstyled " id="authors" data-parent="#accordionExample">
-                            <li>
-                                <a href="{{ url('/admin/author/add') }}"> Ekle </a>
+                        <ul class="collapse submenu list-unstyled {{ request()->is('admin/author*') ? 'show' : '' }} "
+                            id="authors" data-parent="#accordionExample">
+                            <li @if (request()->is('admin/authors/create')) class="active" @endif>
+                                <a href="{{ url('/admin/authors/create') }}"> Ekle </a>
                             </li>
-                            <li>
-                                <a href="{{ url('/admin/authors/list') }}"> Listele </a>
+                            <li @if (request()->is('admin/authors')) class="active" @endif>
+                                <a href="{{ url('/admin/authors') }}"> Listele </a>
                             </li>
                         </ul>
                     </li>

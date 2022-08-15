@@ -6,9 +6,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>@yield('title', $settings['title'])</title>
-    <meta name="description" content="@yield(' description', $settings['description'])">
-    <meta name="author" content="@yield('author', $settings['author'])">
+    @foreach ($settings as $item)
+        <title>@yield('title', $item['title'])</title>
+        <meta name="description" content="@yield(' description', $item['description'])">
+        <meta name="author" content="@yield('author', $item['author'])">
+    @endforeach
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/frontend/media/favicon.png') }}">
@@ -35,8 +38,6 @@
     <!-- Preloader Start Here -->
     <div id="preloader"></div>
     <!-- Preloader End Here -->
-
-
     <div id="main-wrapper" class="main-wrapper">
 
         <!--=====================================-->
