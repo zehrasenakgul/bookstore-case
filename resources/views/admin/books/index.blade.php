@@ -2,24 +2,12 @@
 @section('content')
     <div class="layout-px-spacing">
         <div class=" layout-top-spacing">
+            @if (session()->has('alertSuccessMessage'))
+                <div class="alert alert-success">
+                    {{ session()->get('alertSuccessMessage') }}
+                </div>
+            @endif
             <div class="table-responsive">
-                @if (session()->has('successUpdate'))
-                    <div class="alert alert-success">
-                        {{ session()->get('successUpdate') }}
-                    </div>
-                @elseif (session()->has('errorUpdate'))
-                    <div class="alert alert-danger">
-                        {{ session()->get('errorUpdate') }}
-                    </div>
-                @elseif (session()->has('successDelete'))
-                    <div class="alert alert-success">
-                        {{ session()->get('successDelete') }}
-                    </div>
-                @elseif (session()->has('errorDelete'))
-                    <div class="alert alert-danger">
-                        {{ session()->get('errorDelete') }}
-                    </div>
-                @endif
                 <table class="table table-bordered table-hover table-condensed mb-4">
                     <thead>
                         <tr>
@@ -44,7 +32,7 @@
                                 </td>
                                 <td class="text-center">
                                     <ul class="table-controls">
-                                        <li><a href="{{ url('admin/book/update/' . $item->id) }}" data-toggle="tooltip"
+                                        <li><a href="{{ url('admin/books/' . $item->id) }}" data-toggle="tooltip"
                                                 data-placement="top" title="" data-original-title="Edit"><svg
                                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -53,18 +41,27 @@
                                                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                                                     <polyline points="22 4 12 14.01 9 11.01"></polyline>
                                                 </svg></a></li>
-                                        <li><a href="{{ url('admin/book/delete/' . $item->id) }}" data-toggle="tooltip"
-                                                data-placement="top" title="" data-original-title="Delete"><svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-x-circle text-danger">
-                                                    <circle cx="12" cy="12" r="10"></circle>
-                                                    <line x1="15" y1="9" x2="9" y2="15">
-                                                    </line>
-                                                    <line x1="9" y1="9" x2="15" y2="15">
-                                                    </line>
-                                                </svg></a></li>
+                                        <li>
+                                            <form
+                                                action="{{ route('admin.books.destroy', ['book' => $item->id]) }}"method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="btn btn-light bg-transparent border-0 btn-sm ">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-x-circle text-danger">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="15" y1="9" x2="9" y2="15">
+                                                        </line>
+                                                        <line x1="9" y1="9" x2="15" y2="15">
+                                                        </line>
+                                                    </svg>
+                                                </button>
+
+                                            </form>
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>

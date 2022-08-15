@@ -2,15 +2,23 @@
 
 namespace App\Models;
 
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Author extends Model
 {
-    protected $fillable = ["name", "status"];
+    use SoftDeletes, SoftCascadeTrait;
+    use HasFactory;
+    protected $softCascade = ['books'];
+    protected $fillable = ['name', 'status'];
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
     public function books()
     {
-        return $this->hasMany(Book::class, "author_id", "id");
+        return $this->hasMany(Book::class, 'author_id', 'id');
     }
-    use HasFactory;
 }
