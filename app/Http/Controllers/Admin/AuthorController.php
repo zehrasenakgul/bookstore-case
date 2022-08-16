@@ -10,56 +10,56 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class AuthorController extends Controller
-{
+ {
     public function create()
-    {
-        return view('admin.authors.add');
+ {
+        return view( 'admin.authors.add' );
     }
 
     public function index()
-    {
+ {
         $authors = Author::all();
 
-        return view('admin.authors.index', compact('authors'));
+        return view( 'admin.authors.index', compact( 'authors' ) );
     }
 
-    public function edit(Author $author)
-    {
-        return view('admin.authors.update', compact('author'));
+    public function edit( Author $author )
+ {
+        return view( 'admin.authors.update', compact( 'author' ) );
     }
 
-    public function store(CreateAuthorRequest $request)
-    {
+    public function store( CreateAuthorRequest $request )
+ {
         $author = new Author();
-        $author->name = $request->input('name');
-        $author->status = $request->input('status');
-        $str = Str::slug($request->input('name'), '-');
+        $author->name = $request->input( 'name' );
+        $author->status = $request->input( 'status' );
+        $str = Str::slug( $request->input( 'name' ), '-' );
         $author->slug = $str;
         $author->save();
-        Session::flash('alertSuccessMessage', 'Yazar Kaydı Başarılı!');
+        Session::flash( 'alertSuccessMessage', 'Yazar Kaydı Başarılı!' );
 
-        return redirect()->route('admin.authors.index');
+        return redirect()->route( 'admin.authors.index' );
     }
 
-    public function update(Request $request, Author $author)
-    {
-        $str = Str::slug($request->input('name'), '-');
-        $author->update([
-            'name' => $request->input('name'),
-            'status' => $request->input('status'),
+    public function update( Request $request, Author $author )
+ {
+        $str = Str::slug( $request->input( 'name' ), '-' );
+        $author->update( [
+            'name' => $request->input( 'name' ),
+            'status' => $request->input( 'status' ),
             'slug' => $str,
-        ]);
+        ] );
 
-        Session::flash('alertSuccessMessage', 'Yazar Güncelleme Başarılı!');
+        Session::flash( 'alertSuccessMessage', 'Yazar Güncelleme Başarılı!' );
 
-        return redirect()->route('authors.index');
+        return redirect()->route( 'admin.authors.index' );
     }
 
-    public function destroy(Author $author)
-    {
+    public function destroy( Author $author )
+ {
         $author->delete();
-        Session::flash('alertSuccessMessage', 'Yazar Silme Başarılı!');
+        Session::flash( 'alertSuccessMessage', 'Yazar Silme Başarılı!' );
 
-        return redirect()->route('admin.authors.index');
+        return redirect()->route( 'admin.authors.index' );
     }
 }
