@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title> @yield('title', 'Yönetim Paneli') </title>
-    <link rel="icon" type="image/x-icon" href="public/assets/backend/img/favicon.ico') }}" />
-    <link href="public/assets/backend/css/loader.css') }}" rel="stylesheet" type="text/css" />
-    <script src="public/assets/backend/js/loader.js') }}"></script>
+    <link rel="icon" type="image/x-icon" href="public/assets/backend/img/favicon.ico" />
+    <link href="public/assets/backend/css/loader.css" rel="stylesheet" type="text/css" />
+    <script src="public/assets/backend/js/loader.js"></script>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
-    <link href="public/assets/backend/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="public/assets/backend/css/plugins.css') }}" rel="stylesheet" type="text/css" />
+    <link href="public/assets/backend/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="public/assets/backend/css/plugins.css" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
 
 
@@ -20,7 +20,7 @@
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
     <link href="plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
-    <link href="public/assets/backend/css/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css" />
+    <link href="public/assets/backend/css/dashboard/dash_1.css" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
     @stack('customCss')
 
@@ -36,7 +36,7 @@
             <ul class="navbar-item theme-brand flex-row  text-center">
                 <li class="nav-item theme-logo">
                     <a href="/admin">
-                        <img src="public/assets/backend/img/logo.svg') }}" class="navbar-logo" alt="logo">
+                        <img src="public/assets/backend/img/logo.svg" class="navbar-logo" alt="logo">
                     </a>
                 </li>
                 <li class="nav-item theme-text">
@@ -51,7 +51,7 @@
                 <li class="nav-item dropdown user-profile-dropdown">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <img src="public/assets/backend/img/girl-1.png') }}" alt="avatar">
+                        <img src="public/assets/backend/img/girl-1.png" alt="avatar">
                     </a>
                     <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
                         <div class="">
@@ -62,7 +62,7 @@
                                         stroke-linejoin="round" class="feather feather-user">
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
-                                    </svg> </a>
+                                    </svg> {{ Auth::user()->name }}</a>
                             </div>
                             <div class="dropdown-item">
                                 <a class="" href="/admin/logout"><svg xmlns="http://www.w3.org/2000/svg"
@@ -247,22 +247,22 @@
     <!-- END MAIN CONTAINER -->
 
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-    <script src="public/assets/backend/js/libs/jquery-3.1.1.min.js') }}"></script>
-    <script src="public/assets/backend/bootstrap/js/popper.min.js') }}"></script>
-    <script src="public/assets/backend/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="public/assets/backend/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-    <script src="public/assets/backend/js/app.js') }}"></script>
+    <script src="public/assets/backend/js/libs/jquery-3.1.1.min.js"></script>
+    <script src="public/assets/backend/bootstrap/js/popper.min.js"></script>
+    <script src="public/assets/backend/bootstrap/js/bootstrap.min.js"></script>
+    <script src="public/assets/backend/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="public/assets/backend/js/app.js"></script>
     <script>
         $(document).ready(function() {
             App.init();
         });
     </script>
-    <script src="public/assets/backend/js/custom.js') }}"></script>
+    <script src="public/assets/backend/js/custom.js"></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-    <script src="public/assets/backend/plugins//apex/apexcharts.min.js') }}"></script>
-    <script src="public/assets/backend/js/dashboard/dash_1.js') }}"></script>
+    <script src="public/assets/backend/plugins//apex/apexcharts.min.js"></script>
+    <script src="public/assets/backend/js/dashboard/dash_1.js"></script>
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
