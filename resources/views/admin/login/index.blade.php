@@ -9,12 +9,12 @@
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
-    <link href="public/assets/backend/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="public/assets/backend/css/plugins.css') }}" rel="stylesheet" type="text/css" />
-    <link href="public/assets/backend/css/authentication/form-2.css') }}" rel="stylesheet" type="text/css" />
+    <link href="public/assets/backend/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="public/assets/backend/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="public/assets/backend/css/authentication/form-2.css" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
-    <link rel="stylesheet" type="text/css" href="public/assets/backend/css/forms/theme-checkbox-radio.css') }}">
-    <link rel="stylesheet" type="text/css" href="public/assets/backend/css/forms/switches.css') }}">
+    <link rel="stylesheet" type="text/css" href="public/assets/backend/css/forms/theme-checkbox-radio.css">
+    <link rel="stylesheet" type="text/css" href="public/assets/backend/css/forms/switches.css">
 </head>
 
 <body class="form">
@@ -94,12 +94,12 @@
 
 
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-    <script src="public/assets/backend/assets/js/libs/jquery-3.1.1.min.js') }}"></script>
-    <script src="public/assets/backend/bootstrap/js/popper.min.js') }}"></script>
-    <script src="public/assets/backend/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="public/assets/backend/assets/js/libs/jquery-3.1.1.min.js"></script>
+    <script src="public/assets/backend/bootstrap/js/popper.min.js"></script>
+    <script src="public/assets/backend/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- END GLOBAL MANDATORY SCRIPTS -->
-    <script src="public/assets/backend/assets/js/authentication/form-2.js') }}"></script>
+    <script src="public/assets/backend/assets/js/authentication/form-2.js"></script>
 
 </body>
 
