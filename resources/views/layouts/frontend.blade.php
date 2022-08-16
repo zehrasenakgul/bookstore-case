@@ -11,6 +11,8 @@
         <meta name="description" content="@yield(' description', $item['description'])">
         <meta name="author" content="@yield('author', $item['author'])">
     @endforeach
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->

@@ -10,6 +10,8 @@
     <link href="{{ asset('assets/backend/css/loader.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ asset('assets/backend/js/loader.js') }}"></script>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
     <link href="{{ asset('assets/backend/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/backend/css/plugins.css') }}" rel="stylesheet" type="text/css" />
