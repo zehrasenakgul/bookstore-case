@@ -11,7 +11,7 @@ Route::get('/admin/login', "App\Http\Controllers\Auth\LoginController@showLoginF
 Route::post('/admin/login', "App\Http\Controllers\Auth\LoginController@login");
 Route::get('/admin/logout', "App\Http\Controllers\Auth\LoginController@logout")->name('admin.logout.index');
 
-Route::group(['prefix' => 'admin', "as" => "admin."], function () {
+Route::group(['prefix' => 'admin', "as" => "admin.",'middleware'=>'auth'], function () {
     Route::get('/dashboard', "App\Http\Controllers\Admin\BackendHomeController@index")->name('admin.home.index');
 
     //Formu tüm methodlar için ajax ile post ettiğimden resource için url ve method biçimleri uygun olmuyor.
