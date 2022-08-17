@@ -23,8 +23,8 @@ class CreateBooksTable extends Migration
             $table->string('slug');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
-            $table->index('author_id');
+            // $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
+            // $table->index('author_id');
         });
     }
 
