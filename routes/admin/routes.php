@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +15,8 @@ Route::get('/admin/logout', "App\Http\Controllers\Auth\LoginController@logout")-
 Route::group(['prefix' => 'admin', "as" => "admin.",'middleware'=>'auth'], function () {
     Route::get('/dashboard', "App\Http\Controllers\Admin\BackendHomeController@index")->name('admin.home.index');
 
-    //Formu tüm methodlar için ajax ile post ettiğimden resource için url ve method biçimleri uygun olmuyor.
+    Route::resource("languages",LanguageController::class);
+
     Route::controller(SettingController::class)->group(function () {
         Route::group(['prefix' => 'settings', "as" => "settings."], function () {
             Route::get('/', 'index')->name("index");
@@ -35,6 +37,16 @@ Route::group(['prefix' => 'admin', "as" => "admin.",'middleware'=>'auth'], funct
             Route::delete('/{book}', 'destroy')->name('destroy');
         });
     });
+    // Route::controller(LanguageController::class)->group(function () {
+    //     Route::group(['prefix' => 'languages', "as" => "languages."], function () {
+    //         Route::get('/', 'index')->name('index');
+    //         Route::get('/create', 'create')->name('create');
+    //         Route::post('/', 'store')->name('store');
+    //         Route::get('/{language}', 'edit')->name('edit');
+    //         Route::put('/{language}', 'update')->name('update');
+    //         Route::delete('/{language}', 'destroy')->name('destroy');
+    //     });
+    // });
     Route::controller(AuthorController::class)->group(function () {
         Route::group(['prefix' => 'authors', "as" => "authors."], function () {
             Route::get('/', 'index')->name('index');
