@@ -7,7 +7,6 @@ use App\Http\Requests\CreateAuthorRequest;
 use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
 
 class AuthorController extends Controller {
     public function create() {
@@ -25,25 +24,20 @@ class AuthorController extends Controller {
     }
 
     public function store( CreateAuthorRequest $request ) {
-        Author::create( [
-            'name' => $request->input( 'name' ),
-            'status' => $request->input( 'status' ) ] );
-            Session::flash( 'alertSuccessMessage', 'Yazar Kaydı Başarılı!' );
-            return redirect()->route( 'admin.authors.index' );
-        }
-
-        public function update( Request $request, Author $author ) {
-            $author->update( [
-                'name' => $request->input( 'name' ),
-                'status' => $request->input( 'status' )
-            ] );
-            Session::flash( 'alertSuccessMessage', 'Yazar Güncelleme Başarılı!' );
-            return redirect()->route( 'admin.authors.index' );
-        }
-
-        public function destroy( Author $author ) {
-            $author->delete();
-            Session::flash( 'alertSuccessMessage', 'Yazar Silme Başarılı!' );
-            return redirect()->route( 'admin.authors.index' );
-        }
+        Author::create( $request->all() );
+        Session::flash( 'alertSuccessMessage', 'Yazar Kaydı Başarılı!' );
+        return redirect()->route( 'admin.authors.index' );
     }
+
+    public function update( Request $request, Author $author ) {
+        $author->update( $request->all() );
+        Session::flash( 'alertSuccessMessage', 'Yazar Güncelleme Başarılı!' );
+        return redirect()->route( 'admin.authors.index' );
+    }
+
+    public function destroy( Author $author ) {
+        $author->delete();
+        Session::flash( 'alertSuccessMessage', 'Yazar Silme Başarılı!' );
+        return redirect()->route( 'admin.authors.index' );
+    }
+}

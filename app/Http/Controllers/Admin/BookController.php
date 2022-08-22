@@ -10,7 +10,6 @@ use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class BookController extends Controller
  {
@@ -63,15 +62,10 @@ class BookController extends Controller
             'image' => $filePath,
         ] );
         Session::flash( 'alertSuccessMessage', 'Kitap Güncelleme Başarılı!' );
-        // return redirect()->action( [ BookController::class, 'index' ] );
         return redirect()->route( 'admin.books.index' );
     }
 
     public function destroy( Book $book ) {
-        //soft delete yaptığımız için bu işleme gerek yok görseli silmiyor ;
-        // if ( $book->image != noImagePath::PATH ) {
-        //     Storage::disk( 'storage' )->delete( $book->image );
-        // }
         $book->delete();
         Session::flash( 'alertSuccessMessage', 'Kitap Silme Başarılı!' );
         return redirect()->route( 'admin.books.index' );
