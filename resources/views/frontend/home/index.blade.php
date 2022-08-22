@@ -1,10 +1,27 @@
 @extends('layouts.frontend')
 @section('content')
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-6 text-right">
+                <strong>{{ __('lang.switch') }}</strong>
+            </div>
+            <div class="col-md-4 mb--50">
+                <select class="form-control changeLang">
+                    @foreach ($langs as $item)
+                        <option value="{{ $item->code }}" {{ session()->get('locale') == $item->code ? 'selected' : '' }}>
+                            {{ $item->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+    </div>
+
     <section class="section section-padding-equal project-column-4 pt_md--80 pt_sm--60">
         <div class="container">
             <div class="section-heading heading-left">
-                <h2 class="title">Tüm Kitaplar</h2>
+                <h2 class="title">{{ __('lang.title') }}</h2>
             </div>
             @if (count($books) > 0)
                 <div class="axil-isotope-wrapper">
@@ -37,6 +54,13 @@
 @endsection
 
 @push('customJs')
+    <script type="text/javascript">
+        var url = "{{ route('changeLang') }}";
+
+        $(".changeLang").change(function() {
+            window.location.href = url + "?lang=" + $(this).val();
+        });
+    </script>
 @endpush
 
 @push('customCss')

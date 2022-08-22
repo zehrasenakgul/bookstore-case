@@ -16,6 +16,8 @@ Route::group(['prefix' => 'admin', "as" => "admin.",'middleware'=>'auth'], funct
     Route::get('/dashboard', "App\Http\Controllers\Admin\BackendHomeController@index")->name('admin.home.index');
 
     Route::resource("languages",LanguageController::class);
+    Route::resource("books",BookController::class);
+    Route::resource("authors",AuthorController::class);
 
     Route::controller(SettingController::class)->group(function () {
         Route::group(['prefix' => 'settings', "as" => "settings."], function () {
@@ -27,34 +29,5 @@ Route::group(['prefix' => 'admin', "as" => "admin.",'middleware'=>'auth'], funct
         });
     });
 
-    Route::controller(BookController::class)->group(function () {
-        Route::group(['prefix' => 'books', "as" => "books."], function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/', 'store')->name('store');
-            Route::get('/{book}', 'edit')->name('edit');
-            Route::put('/{book}', 'update')->name('update');
-            Route::delete('/{book}', 'destroy')->name('destroy');
-        });
-    });
-    // Route::controller(LanguageController::class)->group(function () {
-    //     Route::group(['prefix' => 'languages', "as" => "languages."], function () {
-    //         Route::get('/', 'index')->name('index');
-    //         Route::get('/create', 'create')->name('create');
-    //         Route::post('/', 'store')->name('store');
-    //         Route::get('/{language}', 'edit')->name('edit');
-    //         Route::put('/{language}', 'update')->name('update');
-    //         Route::delete('/{language}', 'destroy')->name('destroy');
-    //     });
-    // });
-    Route::controller(AuthorController::class)->group(function () {
-        Route::group(['prefix' => 'authors', "as" => "authors."], function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/', 'store')->name('store');
-            Route::get('/{author}', 'edit')->name('edit');
-            Route::put('/{author}', 'update')->name('update');
-            Route::delete('/{author}', 'destroy')->name('destroy');
-        });
-    });
+ 
 });

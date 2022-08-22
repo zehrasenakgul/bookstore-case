@@ -58,10 +58,10 @@
                                         <div class="mobile-nav-logo">
                                             <a href="/anasayfa">
                                                 <img class="light-mode"
-                                                    src="{{ asset('assets/frontend/media/logo-.svg') }}"
+                                                    src="{{ asset('assets/frontend/media/logo-2.svg') }}"
                                                     alt="Site Logo">
                                                 <img class="dark-mode"
-                                                    src="{{ asset('assets/frontend/media/logo-.svg') }}"
+                                                    src="{{ asset('assets/frontend/media/logo-2.svg') }}"
                                                     alt="Site Logo">
                                             </a>
                                         </div>

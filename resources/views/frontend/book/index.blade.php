@@ -12,7 +12,8 @@
                     <div class="section-heading heading-left sal-animate" data-sal="slide-right" data-sal-duration="1000"
                         data-sal-delay="300">
                         <h1 class="title h2">{{ $book->name }}</h1>
-                        <p>Yazar: {{ $book->author->name }}<br>ISBN Numarası: {{ $book->book_no }}</p>
+                        <p>{{ __('lang.author') }} : {{ $book->author->name }}<br> {{ __('lang.no') }}:
+                            {{ $book->book_no }}</p>
 
                     </div>
                 </div>
