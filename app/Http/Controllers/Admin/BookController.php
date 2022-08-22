@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\noImagePath;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateBookRequest;
+use App\Http\Requests\DeleteBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use App\Models\Author;
 use App\Models\Book;
 use Illuminate\Http\Request;
@@ -46,7 +48,7 @@ class BookController extends Controller
 
     //FormRequest
 
-    public function update( Request $request, Book $book ) {
+    public function update( UpdateBookRequest $request, Book $book ) {
         $filePath = $book->image;
         if ( $request->hasFile( 'image' ) ) {
             if ( $book->image != noImagePath::PATH ) {
@@ -65,8 +67,8 @@ class BookController extends Controller
         return redirect()->route( 'admin.books.index' );
     }
 
-    public function destroy( Book $book ) {
-        $book->delete();
+    public function destroy( Book $book, DeleteBookRequest $request ) {
+        $book->delete( $request->validated() );
         Session::flash( 'alertSuccessMessage', 'Kitap Silme Başarılı!' );
         return redirect()->route( 'admin.books.index' );
     }
