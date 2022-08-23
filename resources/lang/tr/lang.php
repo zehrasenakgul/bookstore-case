@@ -5,6 +5,7 @@ return [
     'title' => 'Tüm Kitaplar',
     'switch' => 'Dil Seçin:',
     'author'=> 'Yazar',
-    'no' => 'ISBN Numarası'
+    'no' => 'ISBN Numarası',
+    'not-found' => 'Kayıtlı kitap bulunamadı'
 
 ];

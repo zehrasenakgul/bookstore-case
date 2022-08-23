@@ -10,9 +10,8 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
  {
-    public function index()
- {
-        $books = Book::active()->get();
+    public function index() {
+        $books = Book::active()->with( 'translation' )->get();
         $langs = Language::all();
         return view( 'frontend.home.index', compact( 'books', 'langs' ) );
     }
@@ -21,7 +20,6 @@ class HomeController extends Controller
  {
         App::setLocale( $request->lang );
         session()->put( 'locale', $request->lang );
-
         return redirect()->back();
     }
 }

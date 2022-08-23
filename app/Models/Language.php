@@ -10,7 +10,10 @@ class Language extends Model {
     protected $table = 'languages';
     protected $fillable = [ 'name', 'code', 'icon' ];
 
-    public function translations() {
-        return $this->hasMany( Translation::class );
+    public function bookTranslations() {
+        return $this->hasMany( BookTranslation::class );
     }
+
+   
+
 }

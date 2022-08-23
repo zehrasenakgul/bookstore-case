@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\BookTranslation;
 use App\Observers\AuthorObserver;
 use App\Observers\BookObserver;
 use Illuminate\Auth\Events\Registered;
@@ -31,7 +32,7 @@ class EventServiceProvider extends ServiceProvider
     */
 
     public function boot() {
-        Book::observe( BookObserver::class );
+        BookTranslation::observe( BookObserver::class );
         Author::observe( AuthorObserver::class );
     }
 }

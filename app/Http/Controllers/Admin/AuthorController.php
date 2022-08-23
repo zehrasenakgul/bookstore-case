@@ -7,8 +7,6 @@ use App\Http\Requests\CreateAuthorRequest;
 use App\Http\Requests\DeleteAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class AuthorController extends Controller {
@@ -22,7 +20,7 @@ class AuthorController extends Controller {
         return view( 'admin.authors.index', compact( 'authors' ) );
     }
 
-    public function edit( Author $author ) {
+    public function show( Author $author ) {
         return view( 'admin.authors.update', compact( 'author' ) );
     }
 

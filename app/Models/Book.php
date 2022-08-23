@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\App;
 
 class Book extends Model
  {
@@ -12,8 +13,7 @@ class Book extends Model
 
     use HasFactory;
     use SoftDeletes;
-    protected $table = 'Books';
-    protected $fillable = [ 'name', 'author_id', 'slug', 'image', 'book_no', 'status' ];
+    protected $fillable = [ 'author_id', 'image', 'book_no', 'status' ];
     protected $casts = [
         'status' => 'boolean',
     ];
@@ -22,8 +22,14 @@ class Book extends Model
         $query->where( 'status', 1 );
     }
 
-    public function author()
- {
-        return $this->hasOne( Author::class, 'id', 'author_id' );
+    public function author() {
+        return $this->belongsTo( Author::class );
+    }
+
+    public  function translation( $language = null ) {
+        if ( $language == null ) {
+            $language = App::getLocale();
+        }
+        return $this->hasMany( BookTranslation::class )->where( 'lang', '=', $language );
     }
 }

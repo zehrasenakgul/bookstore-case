@@ -23,7 +23,6 @@ class UpdateBookRequest extends FormRequest {
 
     public function rules() {
         return [
-            'name' => 'required|max:255',
             'author_id' => 'required',
             'book_no' => 'required',
             'status' => 'required|boolean',
@@ -33,7 +32,6 @@ class UpdateBookRequest extends FormRequest {
 
     public function messages() {
         return [
-            'name.required' => 'Bu alan zorunludur.',
             'author_id.required' => 'Bu alan zorunludur.',
             'book_no.required' => 'Bu alan zorunludur.',
             'status.required' => 'Bu alan zorunludur.',

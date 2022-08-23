@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use Illuminate\Support\Str;
-use App\Models\Book;
+use App\Models\BookTranslation;
 
 class BookObserver {
     /**
@@ -13,7 +13,7 @@ class BookObserver {
     * @return void
     */
 
-    public function creating( Book $book ) {
+    public function creating( BookTranslation $book ) {
         $book->slug = Str::slug( $book->name );
 
     }
@@ -25,7 +25,7 @@ class BookObserver {
     * @return void
     */
 
-    public function updating( Book $book ) {
+    public function updating( BookTranslation $book ) {
         $book->slug = Str::slug( $book->name );
 
     }
