@@ -41,28 +41,31 @@
     <div id="preloader"></div>
     <!-- Preloader End Here -->
     <div id="main-wrapper" class="main-wrapper">
-
         <!--=====================================-->
         <!--=        Header Area Start       	=-->
         <!--=====================================-->
-        <header class="header axil-header header-style-2">
+        <header class="header axil-header header-style-1">
             <div id="axil-sticky-placeholder"></div>
             <div class="axil-mainmenu">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="header-navbar">
+                        <div class="header-logo">
+                            <a href="{{ url('/books') }}"><img class="light-version-logo"
+                                    src="{{ asset('assets/frontend/media/logo.svg') }}" alt="logo"></a>
+                            <a href="{{ url('/books') }}"><img class="dark-version-logo"
+                                    src="{{ asset('assets/frontend/media/logo-3.svg') }}" alt="logo"></a>
+                            <a href="{{ url('/books') }}"><img class="sticky-logo"
+                                    src="{{ asset('assets/frontend/media/logo-2.svg') }}" alt="logo"></a>
+                        </div>
                         <div class="header-main-nav">
                             <!-- Start Mainmanu Nav -->
                             <nav class="mainmenu-nav" id="mobilemenu-popup">
                                 <div class="d-block d-lg-none">
                                     <div class="mobile-nav-header">
                                         <div class="mobile-nav-logo">
-                                            <a href="/anasayfa">
-                                                <img class="light-mode"
-                                                    src="{{ asset('assets/frontend/media/logo-2.svg') }}"
-                                                    alt="Site Logo">
-                                                <img class="dark-mode"
-                                                    src="{{ asset('assets/frontend/media/logo-2.svg') }}"
-                                                    alt="Site Logo">
+                                            <a href="{{ url('/books') }}">
+                                                <img class="light-mode" src="assets/media/logo-2.svg" alt="Site Logo">
+                                                <img class="dark-mode" src="assets/media/logo-3.svg" alt="Site Logo">
                                             </a>
                                         </div>
                                         <button class="mobile-menu-close" data-bs-dismiss="offcanvas"><i
@@ -72,22 +75,11 @@
                             </nav>
                             <!-- End Mainmanu Nav -->
                         </div>
-                        <div class="header-action">
-                            <ul class="list-unstyled">
-                                <li class="sidemenu-btn d-lg-none">
-                                    <button class="btn-wrap" data-bs-toggle="offcanvas"
-                                        data-bs-target="#offcanvasMenuRight">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
         </header>
+
 
         @yield('content')
         <!--=====================================-->
