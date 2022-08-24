@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <section class="section section-padding-equal project-column-4 pt_md--80 pt_sm--60">
+    <section class="section project-column-4 pt_md--80 pt_sm--60">
         <div class="container">
             <div class="section-heading heading-left">
                 <h2 class="title">{{ __('lang.title') }}</h2>
