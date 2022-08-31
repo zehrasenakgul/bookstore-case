@@ -10,15 +10,15 @@ class Kernel extends ConsoleKernel
     protected $commands  = [
         Commands\DailyQuote::class,
     ];
-    /**
+    /**    
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule  
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
-    $schedule->command('quote:daily')->everyMinute();
+      $schedule->command('quote:daily')->everyMinute();
     }
 
     /**
@@ -33,3 +33,4 @@ class Kernel extends ConsoleKernel
         require base_path('routes/console.php');
     }
 }
+ 

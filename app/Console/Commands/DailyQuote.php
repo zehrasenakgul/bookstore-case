@@ -4,8 +4,10 @@ namespace App\Console\Commands;
 
 use App\Models\Book;
 use App\Models\User;
+use App\Notifications\QuoteNotification;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class DailyQuote extends Command {
     /**
@@ -39,17 +41,33 @@ class DailyQuote extends Command {
     */
 
     public function handle() {
+
+        // Mail::send( 'email.books', [ 'data' => $books ], function( $mail ) use ( $user ) {
+        //     $mail->from( 'bookstore@moneo.com', 'Moneo' );
+        //     $mail->to( $user->email )->subject( 'Daily new Quote!' );
+        // }
+
         $books = Book::whereDay( 'created_at', '=', now()->day )
-        ->with("translation")
+        ->with( 'translation' )
         ->orderBy( 'id', 'asc' )
         ->get();
-        $user = User::where( 'id', 1 )->first();
-     
-        Mail::send('email.books', ['data' => $books], function( $mail ) use ( $user ) {
-            $mail->from( 'bookstore@moneo.com' ,"Moneo");
-            $mail->to( $user->email )->subject('Daily new Quote!');
-        });
 
+        $userSchema = User::where( 'id', 1 )->first();
+
+        $array = array();
+
+        foreach ( $books as $value ) {
+            $array[] = $value->translation[ 0 ]->name ;
+        }
+
+        $quoteData = [
+            'greeting' => 'Merhaba '.$userSchema->name.',',
+            'body' => 'Bugün eklenen kitaplar:',
+            'list' =>  $array,
+            'thanks' => 'Thank you this is from codeanddeploy.com',
+        ];
+
+        Notification::send( $userSchema->email, new QuoteNotification( $quoteData ) );
         $this->info( 'Books added today were reported to the manager via e-mail.' );
 
     }
