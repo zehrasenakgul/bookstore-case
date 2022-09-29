@@ -5,20 +5,24 @@
         <div class=" layout-top-spacing">
             <form class="form-vertical" enctype="multipart/form-data" action="{{ url('admin/books') }}" method="POST">
                 {{ csrf_field() }}
-                {{-- @if ($errors->any())
-                    @foreach ($errors->all as $error)
-                        <p>{{ $error }}</p>
-                    @endforeach
-                @endif --}}
+                @foreach ($langs as $item)
+                    {{ strtoupper($item->code) }}
+                    <hr>
+                    <input type="hidden" id="{{ $item->code }}" value="{{ $item->code }}"
+                        name="lang[{!! $item->code !!}]" class="form-control" />
+                    <div class="form-group mb-4">
+                        <label class="control-label">Kitap Adı</label>
+                        <input type="text" id="{{ $item->code }}" name="name[{!! $item->code !!}]"
+                            class="form-control" />
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="control-label">Metin</label>
+                        <textarea class="ckeditor" id="{{ $item->code }}" name="content[{!! $item->code !!}]"></textarea>
+                    </div>
+                @endforeach
+
                 <div class="form-group mb-4">
-                    <label class="control-label">Kitap Adı:</label>
-                    <input type="text" name="name" class="form-control">
-                    @if ($errors->has('name'))
-                        <span class="text-danger text-left">{{ $errors->first('name') }}</span>
-                    @endif
-                </div>
-                <div class="form-group mb-4">
-                    <label class="control-label">Kitap ISBN Numarası:</label>
+                    <label class="control-label">Kitap ISBN Numarası</label>
                     <input type="number" name="book_no" class="form-control">
                     @if ($errors->has('book_no'))
                         <span class="text-danger text-left">{{ $errors->first('book_no') }}</span>
@@ -62,6 +66,7 @@
         </div>
     </div>
 @endsection
+
 
 @push('customJs')
     <script src="{{ asset('assets/backend/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>

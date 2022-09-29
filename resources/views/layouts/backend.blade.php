@@ -231,6 +231,44 @@
                         </ul>
                     </li>
 
+
+                    <li class="menu">
+                        <a href="#languages"
+                            @if (request()->is('admin/language*')) data-active="true" data-toggle="collapse"
+                            aria-expanded="true" aria-expanded="false" class="dropdown-toggle"
+                            @else data-toggle="collapse" class="dropdown-toggle" @endif>
+                            <div class="">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                                    stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                    class="css-i6dzq1">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <path
+                                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                    </path>
+                                </svg>
+                                <span>Dil Ayarları</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="feather feather-chevron-right">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled {{ request()->is('admin/language*') ? 'show' : '' }} "
+                            id="languages" data-parent="#accordionExample">
+                            <li @if (request()->is('admin/languages/create')) class="active" @endif>
+                                <a href="{{ url('/admin/languages/create') }}"> Ekle </a>
+                            </li>
+                            <li @if (request()->is('admin/languages')) class="active" @endif>
+                                <a href="{{ url('/admin/languages') }}"> Listele </a>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
                 <!-- <div class="shadow-bottom"></div> -->
 
@@ -247,6 +285,7 @@
 
     </div>
     <!-- END MAIN CONTAINER -->
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="{{ asset('assets/backend/js/libs/jquery-3.1.1.min.js') }}"></script>

@@ -2,8 +2,8 @@
 @section('content')
 
     <head>
-        <title>@yield('title', $book->name)</title>
-        <meta name="description" content="@yield(' description', $book->author->name)">
+        <title>@yield('title', $translate->name)</title>
+        <meta name="description" content="@yield(' description', $translate->book->author->name)">
     </head>
     <div class="breadcrum-area breadcrumb-banner single-breadcrumb">
         <div class="container">
@@ -11,15 +11,18 @@
                 <div class="col-lg-6">
                     <div class="section-heading heading-left sal-animate" data-sal="slide-right" data-sal-duration="1000"
                         data-sal-delay="300">
-                        <h1 class="title h2">{{ $book->name }}</h1>
-                        <p>Yazar: {{ $book->author->name }}<br>ISBN Numarası: {{ $book->book_no }}</p>
+                        <h1 class="title h2">{{ $translate->name }}</h1>
+                        <p>{!! $translate->content !!}</p>
+                        <p>{{ __('lang.author') }} : {{ $translate->book->author->name }}<br> {{ __('lang.no') }}:
+                            {{ $translate->book->book_no }}</p>
 
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="banner-thumbnail sal-animate" data-sal="slide-up" data-sal-duration="1000"
                         data-sal-delay="400">
-                        <img class="paralax-image" src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}">
+                        <img class="paralax-image" src="{{ asset('storage/' . $translate->book->image) }}"
+                            alt="{{ $translate->name }}">
 
                     </div>
                 </div>

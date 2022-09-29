@@ -12,7 +12,6 @@
                     <thead>
                         <tr>
                             <th>Kitap Adı</th>
-                            <th>Yazar Adı</th>
                             <th>Aktif/Pasif</th>
                             <th class="text-center">İşlemler</th>
                         </tr>
@@ -20,8 +19,7 @@
                     <tbody>
                         @foreach ($books as $item)
                             <tr>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->author->name }}</td>
+                                <td>{{ $item->translation[0]->name }}</td>
 
                                 <td>
                                     @if ($item->status == '0')

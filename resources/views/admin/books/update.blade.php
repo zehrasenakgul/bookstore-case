@@ -15,10 +15,27 @@
                     @endforeach
                 @endif
 
-                <div class="form-group mb-4">
-                    <label class="control-label">Kitap Adı:</label>
-                    <input type="text" name="name" Value="{{ $book->name }}" class="form-control">
-                </div>
+                @foreach ($langs as $item)
+                    {{ strtoupper($item->code) }}
+                    <hr>
+                    @foreach ($translations as $index)
+                        @if ($item->code == $index->lang)
+                            <input type="hidden" id="{{ $item->code }}" value="{{ $item->code }}"
+                                name="lang[{!! $item->code !!}]" class="form-control" />
+                            <div class="form-group mb-4">
+                                <label class="control-label">Kitap Adı</label>
+                                <input type="text" id="{{ $item->code }}" name="name[{!! $item->code !!}]"
+                                    class="form-control" value="{{ $index->name }}" />
+                            </div>
+                            <div class="form-group mb-4">
+                                <label class="control-label">Metin</label>
+                                <textarea class="ckeditor" id="{{ $item->code }}" name="content[{!! $item->code !!}]">{{ $index->content }}
+                                </textarea>
+                            </div>
+                        @endif
+                    @endforeach
+                @endforeach
+
                 <div class="form-group mb-4">
                     <label class="control-label">Kitap ISBN Numarası:</label>
                     <input type="number" name="book_no" Value="{{ $book->book_no }}" class="form-control">

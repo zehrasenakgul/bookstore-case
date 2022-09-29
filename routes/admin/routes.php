@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +15,10 @@ Route::get('/admin/logout', "App\Http\Controllers\Auth\LoginController@logout")-
 Route::group(['prefix' => 'admin', "as" => "admin.",'middleware'=>'auth'], function () {
     Route::get('/dashboard', "App\Http\Controllers\Admin\BackendHomeController@index")->name('admin.home.index');
 
-    //Formu tüm methodlar için ajax ile post ettiğimden resource için url ve method biçimleri uygun olmuyor.
+    Route::resource("languages",LanguageController::class);
+    Route::resource("books",BookController::class);
+    Route::resource("authors",AuthorController::class);
+
     Route::controller(SettingController::class)->group(function () {
         Route::group(['prefix' => 'settings', "as" => "settings."], function () {
             Route::get('/', 'index')->name("index");
@@ -25,24 +29,5 @@ Route::group(['prefix' => 'admin', "as" => "admin.",'middleware'=>'auth'], funct
         });
     });
 
-    Route::controller(BookController::class)->group(function () {
-        Route::group(['prefix' => 'books', "as" => "books."], function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/', 'store')->name('store');
-            Route::get('/{book}', 'edit')->name('edit');
-            Route::put('/{book}', 'update')->name('update');
-            Route::delete('/{book}', 'destroy')->name('destroy');
-        });
-    });
-    Route::controller(AuthorController::class)->group(function () {
-        Route::group(['prefix' => 'authors', "as" => "authors."], function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/', 'store')->name('store');
-            Route::get('/{author}', 'edit')->name('edit');
-            Route::put('/{author}', 'update')->name('update');
-            Route::delete('/{author}', 'destroy')->name('destroy');
-        });
-    });
+ 
 });
